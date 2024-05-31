@@ -2,4 +2,5 @@
 /sonic/gitignore
 /sonic/sonic/.env
 
+/sonic/sonic/__pycache__
 /sonic/staticfiles
