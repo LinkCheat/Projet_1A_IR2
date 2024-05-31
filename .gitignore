@@ -1,1 +1,9 @@
 /sonic/db.sqlite3
+/sonic/gitignore
+/sonic/sonic/.env
+
+
+/sonic/staticfiles
+
+/sonic/sonic/__pycache__
+/sonic/epresence/__pycache__
