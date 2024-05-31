@@ -19,3 +19,10 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+handler400 = 'epresence.views.error_400'
+handler403 = 'epresence.views.error_403'
+handler404 = 'epresence.views.error_404'
+handler405 = 'epresence.views.error_405'
+handler500 = 'epresence.views.error_500'
