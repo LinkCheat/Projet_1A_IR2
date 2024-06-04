@@ -3,7 +3,5 @@
 
 /sonic/staticfiles
 
-/sonic/sonic/__pycache__
-/sonic/epresence/__pycache__
 *.pyc
 
