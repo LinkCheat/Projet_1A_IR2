@@ -1,6 +1,5 @@
 /sonic/db.sqlite3
-/sonic/gitignore
-/sonic/sonic/.env
+/sonic/.env
 
 /sonic/staticfiles
 
