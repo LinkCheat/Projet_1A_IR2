@@ -5,12 +5,22 @@
 ```
 conda create -n PROJET
 conda activate PROJET
+```
+
+## Installer les dépendances
+
+```
 conda install django
 conda install whitenoise
 pip install python-decouple
 ```
+ou
 
-copier le fichier .env dans /sonic/sonic (au même niveau que settings.py)
+```
+pip install -r requirements.txt
+```
+
+copier le fichier .env dans la racine du projet (/sonic)
 
 ## Répartition du travail
 
@@ -32,4 +42,10 @@ copier le fichier .env dans /sonic/sonic (au même niveau que settings.py)
 ```
 python manage.py collectstatic
 python manage.py runserver
+```
+
+ou 
+
+```
+docker compose -f sonic/docker-compose.yaml up -d --build backend
 ```
