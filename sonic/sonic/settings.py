@@ -42,13 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'epresence.apps.EpresenceConfig',
+    'epresence_api.apps.Epresence_apiConfig',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -136,3 +139,20 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 'django.core.mail.backends.console.EmailBackend' spécifie que les
+# courriers électroniques générés par l'application Django seront
+# affichés dans la console au lieu d'être réellement envoyés par e-mail.
+# Cela peut être utile pendant le développement et le débogage, car cela
+# évite d'envoyer accidentellement des e-mails réels à des destinataires
+# réels tout en permettant aux développeurs de voir les e-mails générés
+# directement dans la console.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# whitenoise config
+
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+CORS_ORIGIN_ALLOW_ALL = True
