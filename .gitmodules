@@ -1,0 +1,3 @@
+[submodule "epresence"]
+	path = epresence
+	url = https://github.com/usfrushdie/epresence
