@@ -5,9 +5,19 @@
 ```
 conda create -n PROJET
 conda activate PROJET
+```
+
+## Installer les dépendances
+
+```
 conda install django
 conda install whitenoise
 pip install python-decouple
+```
+ou
+
+```
+pip install -r requirements.txt
 ```
 
 copier le fichier .env dans /sonic/sonic (au même niveau que settings.py)
