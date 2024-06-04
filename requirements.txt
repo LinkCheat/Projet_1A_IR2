@@ -1,7 +1,0 @@
-asgiref @ file:///work/perseverance-python-buildout/croot/asgiref_1698866701569/work
-Django @ file:///work/perseverance-python-buildout/croot/django_1698884878321/work
-python-decouple==3.8
-setuptools==69.5.1
-sqlparse @ file:///work/perseverance-python-buildout/croot/sqlparse_1698874574933/work
-wheel==0.43.0
-whitenoise==6.6.0

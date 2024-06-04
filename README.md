@@ -20,7 +20,7 @@ ou
 pip install -r requirements.txt
 ```
 
-copier le fichier .env dans /sonic/sonic (au même niveau que settings.py)
+copier le fichier .env dans la racine du projet (/sonic)
 
 ## Répartition du travail
 
@@ -42,4 +42,10 @@ copier le fichier .env dans /sonic/sonic (au même niveau que settings.py)
 ```
 python manage.py collectstatic
 python manage.py runserver
+```
+
+ou 
+
+```
+docker compose -f sonic/docker-compose.yaml up -d --build backend
 ```
