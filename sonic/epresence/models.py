@@ -1,3 +1,76 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-# Create your models here.
+
+class Supervisor(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+    
+class Professor(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+    
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+    coefficient = models.FloatField()
+    def __str__(self):
+        return self.name
+    
+class Sector(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+    
+class Groups(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Group')
+    def __str__(self):
+        return self.name
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    filiere = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=('groups'),
+        blank=True,
+        related_name='custom_users'
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=('user permissions'),
+        blank=True,
+        related_name='custom_users_permissions'
+    )
+
+@receiver(post_save, sender=CustomUser)
+def assign_student_groups(sender, instance, created, **kwargs):
+    if created and getattr(instance, 'is_student', False):
+
+        student_name = instance.username.lower()
+        if "td1" in student_name:
+            td_group, _ = Group.objects.get_or_create(name='TD1')
+        elif "td2" in student_name:
+            td_group, _ = Group.objects.get_or_create(name='TD2')
+
+        if "tp1" in student_name:
+            tp_group, _ = Group.objects.get_or_create(name='TP1')
+        elif "tp2" in student_name:
+            tp_group, _ = Group.objects.get_or_create(name='TP2')
+        elif "tp3" in student_name:
+            tp_group, _ = Group.objects.get_or_create(name='TP3')
+
+        instance.groups.add(td_group)
+        instance.groups.add(tp_group)
+
+
+
+
+
