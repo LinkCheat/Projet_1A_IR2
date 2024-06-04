@@ -28,6 +28,17 @@ copier le fichier .env dans la racine du projet (/sonic)
 
 ```
 npm install
+```
+
+On peut alors tester 
+
+```
+npm start
+```
+
+Si problème :
+
+```
 npm install bootstrap
 npm install axios
 ```
