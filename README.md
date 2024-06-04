@@ -13,6 +13,8 @@ conda activate PROJET
 conda install django
 conda install whitenoise
 pip install python-decouple
+pip install djangorestframework
+pip install django-cors-headers
 ```
 ou
 
