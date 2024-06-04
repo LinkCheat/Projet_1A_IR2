@@ -7,7 +7,7 @@ conda create -n PROJET
 conda activate PROJET
 ```
 
-## Installer les dépendances
+## Installer les dépendances de Django
 
 ```
 conda install django
@@ -23,6 +23,16 @@ pip install -r requirements.txt
 ```
 
 copier le fichier .env dans la racine du projet (/sonic)
+
+## Installer les dépendances de node/React
+
+```
+npm install
+npm install bootstrap
+npm install axios
+```
+
+/ ! \ doit etre effectuer au niveau de package-lock.json
 
 ## Répartition du travail
 
