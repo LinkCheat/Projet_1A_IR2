@@ -20,7 +20,6 @@ header {
   align-items: center;
   position: relative;
 }
-
 button#menu-toggle {
   position: absolute;
   left: 10px;
