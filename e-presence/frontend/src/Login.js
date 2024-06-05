@@ -5,25 +5,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
+    setSuccess('');
     try {
       const response = await axios.post('http://localhost:8000/login/', {
-        email: email,
-        password: password,
+        email,
+        password,
       });
-      if (response && response.data) {
-        setMessage(response.data.message);
-      } else {
-        setMessage('Une erreur (1) est survenue, veuillez réessayer.');
-      }
+      setSuccess('Login successful!');
+      // Vous pouvez également stocker le token de l'utilisateur ici si nécessaire
     } catch (error) {
       if (error.response && error.response.data) {
-        setMessage(error.response.data.message);
+        setError(error.response.data.message);
       } else {
-        setMessage('Une erreur (2) est survenue, veuillez réessayer.');
+        setError(error.response.data.message);
       }
     }
   };
@@ -33,12 +33,11 @@ const Login = () => {
       <div className="row justify-content-center w-100">
         <div className="col-md-4">
           <div className="card p-4">
-
             <img
-              class="fit-picture"
+              className="fit-picture"
               src="./assets/img/Logo.png"
-              alt="e-presence" />
-
+              alt="e-presence"
+            />
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">Adresse e-mail</label>
@@ -62,7 +61,8 @@ const Login = () => {
               </div>
               <button type="submit" className="btn btn-primary w-100">Se connecter</button>
             </form>
-            {message && <p className="mt-3 text-center">{message}</p>}
+            {error && <p className="mt-3 text-center text-danger">{error}</p>}
+            {success && <p className="mt-3 text-center text-success">{success}</p>}
           </div>
         </div>
       </div>

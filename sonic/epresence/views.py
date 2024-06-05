@@ -26,6 +26,7 @@ def login_view(request):
     return JsonResponse({'message': 'Requête invalide'}, status=400)
 
 
+
 def index(request):
     return render(request, 'index.html')
 
