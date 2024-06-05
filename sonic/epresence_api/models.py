@@ -36,14 +36,14 @@ class Groups(models.Model):
         return self.name
 
 class Subject(models.Model):
+    name = models.CharField(max_length=25, null=True, blank=True)
     subject_id = models.CharField(max_length=10, primary_key=True)
-    subject_name = models.CharField(max_length=25, null=True, blank=True)
     sector = models.CharField(max_length=25, null=True, blank=True)
     semester = models.CharField(max_length=5, null=True, blank=True)
     coefficient = models.IntegerField(null=True, blank=True)
     ue = models.CharField(max_length=5, null=True, blank=True)
     def __str__(self):
-        return self.nom_matiere
+        return self.name
 
 class Student(models.Model):
     student_id = models.AutoField(primary_key=True)
