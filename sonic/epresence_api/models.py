@@ -1,85 +1,49 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    def str(self):
-        return self.user.email
-
-class Hourly(models.Model):
-    date = models.DateField()
-    motif = models.CharField(max_length=100)
-    attendance = models.BooleanField()
-    def str(self):
-        return self.motif
-
-class Student(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student')
-    note = models.FloatField()
-    attendances = models.ManyToManyField(Hourly, related_name='attendances')
-    def str(self):
-        return self.user.user.email
-
-class Sector(models.Model):
-    name = models.CharField(max_length=100)
-    coefficient = models.FloatField()
-    classe = models.ManyToManyField(Student, related_name='classe')
-    def str(self):
-        return self.name
-
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
-    sector = models.ManyToManyField(Sector, related_name='sector')
-    def str(self):
+class Supervisor(models.Model):
+    name = models.CharField(max_length=15)
+    def __str__(self):
         return self.name
 
 class Professor(models.Model):
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='professor')
-    subject = models.ManyToManyField(Subject, related_name='subject')
-    def str(self):
-        return self.user.user.email
-
-class Supervisor(models.Model):
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='supervisor')
-    professors = models.ManyToManyField(Professor, related_name='professor')
-    def str(self):
-        return self.user.user.email
-
-
-"""
-class Supervisor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=15)
     def __str__(self):
         return self.name
-    
-class Professor(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
-    
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
-    coefficient = models.FloatField()
-    def __str__(self):
-        return self.name
-    
+
 class Sector(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=15)
     def __str__(self):
         return self.name
-    
+
 class Groups(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Group')
+    name = models.CharField(max_length=15, verbose_name='Group')
     def __str__(self):
         return self.name
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    filiere = models.ForeignKey(Sector, on_delete=models.CASCADE)
+class Matiere(models.Model):
+    matiere_id = models.CharField(max_length=10, primary_key=True)
+    nom_matiere = models.CharField(max_length=25, null=True, blank=True)
+    filiere = models.CharField(max_length=25, null=True, blank=True)
+    semestre = models.CharField(max_length=5, null=True, blank=True)
+    coefficient = models.IntegerField(null=True, blank=True)
+    ue = models.CharField(max_length=5, null=True, blank=True)
+
     def __str__(self):
-        return self.name
+        return self.nom_matiere
+
+class Student(models.Model):
+    student_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=15)
+    last_name = models.CharField(max_length=15)
+    field_of_study = models.CharField(max_length=5)
+    groupe_tp = models.CharField(max_length=5, null=True, blank=True)
+    groupe_td = models.CharField(max_length=5, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class CustomUser(AbstractUser):
     groups = models.ManyToManyField(
@@ -112,10 +76,7 @@ def assign_student_groups(sender, instance, created, **kwargs):
         elif "tp3" in student_name:
             tp_group, _ = Group.objects.get_or_create(name='TP3')
 
-        instance.groups.add(td_group)
-        instance.groups.add(tp_group)
-"""
-
-
-
-
+        if td_group:
+            instance.groups.add(td_group)
+        if tp_group:
+            instance.groups.add(tp_group)
