@@ -28,14 +28,16 @@ def login_view(request):
     return JsonResponse({'message': 'Requête invalide'}, status=400)
 
 
+# exemple de vue API 
 
 @api_view(['GET'])
 def hello_world(request):
     return Response({'message': 'Hello, world from Django API!'})
 
-
+"""
 def index(request):
     return render(request, 'index.html')
+"""
 
 def error_400(request, exception):
     return render(request, 'epresence_api/400.html', status=400)
