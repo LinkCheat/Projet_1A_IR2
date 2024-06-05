@@ -14,9 +14,17 @@ const Login = () => {
         email: email,
         password: password,
       });
-      setMessage(response.data.message);
+      if (response && response.data) {
+        setMessage(response.data.message);
+      } else {
+        setMessage('Une erreur (1) est survenue, veuillez réessayer.');
+      }
     } catch (error) {
-      setMessage(error.response.data.message);
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('Une erreur (2) est survenue, veuillez réessayer.');
+      }
     }
   };
 
