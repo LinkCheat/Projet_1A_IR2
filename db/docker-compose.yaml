@@ -1,5 +1,20 @@
 version: '3'
 services:
+  mysql:
+    image: mysql:5.7
+    container_name: Sonic_mysql_db
+    restart: always                       
+    environment:
+      MYSQL_DATABASE: 'test'              
+      MYSQL_USER: 'sample'                
+      MYSQL_PASSWORD: 'password'          
+      MYSQL_ROOT_PASSWORD: 'password'     
+    ports:
+      - '3306:3306'                       
+    expose:
+      - '3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
   frontend:
     build: 
       context : ./epresence_frontend
