@@ -1,17 +1,19 @@
-FROM python:3.11
+FROM python:3.12
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set the working directory
-WORKDIR /test
+WORKDIR /backend
 
 # Install dependencies
-COPY requirements.txt /test/
+COPY requirements.txt /backend/
 RUN pip install -r requirements.txt
 
 # Copy the project code into the container
-COPY . /test/
+COPY . /backend/
+
+EXPOSE 8000
 
 
