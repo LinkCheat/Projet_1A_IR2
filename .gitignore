@@ -1,4 +1,4 @@
-/sonic/db.sqlite3
+*.sqlite3
 /sonic/.env
 
 /sonic/staticfiles

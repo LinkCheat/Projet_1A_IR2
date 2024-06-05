@@ -11,6 +11,8 @@ services:
       - ./epresence_frontend:/frontend
     ports:
       - "3000:3000"
+    depends_on:
+      - backend
   backend:
     build: 
       context: ./sonic
@@ -26,4 +28,3 @@ services:
       - ./.env
 volumes:
   data:
-  mysql-db:

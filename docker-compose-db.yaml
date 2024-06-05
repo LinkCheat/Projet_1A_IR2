@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mysql:
+  db:
     image: mysql:5.7
     container_name: Sonic_mysql_db
     restart: always                       
@@ -14,7 +14,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - mysql-db:/var/lib/mysql
+      - mysql-db-5.7:/var/lib/mysql
   frontend:
     build: 
       context : ./epresence_frontend
@@ -26,6 +26,8 @@ services:
       - ./epresence_frontend:/frontend
     ports:
       - "3000:3000"
+    depends_on:
+      - backend
   backend:
     build: 
       context: ./sonic
@@ -39,6 +41,8 @@ services:
       - "8000:8000"
     env_file:
       - ./.env
+    depends_on:
+      - db
 volumes:
   data:
-  mysql-db:
+  mysql-db-5.7:
