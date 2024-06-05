@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import LoginView, hello_world
 
-app_name = "rooms"
 urlpatterns = [
-    path('hello-world/', views.hello_world, name='hello_world'),
+    path('login/', LoginView.as_view(), name='api-login'),
+    path('hello/', hello_world, name='hello-world'),
 ]

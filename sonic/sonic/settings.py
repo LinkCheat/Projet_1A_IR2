@@ -90,6 +90,16 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -109,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ALLOWED_HOSTS = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -155,4 +166,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 #STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
-CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+

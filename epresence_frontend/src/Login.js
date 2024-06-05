@@ -10,13 +10,13 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/login/', {
+      const response = await axios.post('http://localhost:8000/api/login/', {
         email: email,
         password: password,
       });
       setMessage(response.data.message);
     } catch (error) {
-      setMessage(error.response.data.message);
+      setMessage(error.response?.data?.message || 'Erreur de connexion');
     }
   };
 
@@ -25,12 +25,11 @@ const Login = () => {
       <div className="row justify-content-center w-100">
         <div className="col-md-4">
           <div className="card p-4">
-
             <img
-              class="fit-picture"
+              className="fit-picture"
               src="./assets/img/Logo.png"
-              alt="e-presence" />
-
+              alt="e-presence" 
+            />
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">Adresse e-mail</label>
