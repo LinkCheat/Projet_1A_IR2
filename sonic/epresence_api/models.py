@@ -1,7 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import User, AbstractUser, Group, Permission
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    def str(self):
+        return self.user.email
+
+class Hourly(models.Model):
+    date = models.DateField()
+    motif = models.CharField(max_length=100)
+    attendance = models.BooleanField()
+    def str(self):
+        return self.motifr
 
 class Supervisor(models.Model):
     name = models.CharField(max_length=15)
@@ -23,14 +35,13 @@ class Groups(models.Model):
     def __str__(self):
         return self.name
 
-class Matiere(models.Model):
-    matiere_id = models.CharField(max_length=10, primary_key=True)
-    nom_matiere = models.CharField(max_length=25, null=True, blank=True)
-    filiere = models.CharField(max_length=25, null=True, blank=True)
-    semestre = models.CharField(max_length=5, null=True, blank=True)
+class Subject(models.Model):
+    subject_id = models.CharField(max_length=10, primary_key=True)
+    subject_name = models.CharField(max_length=25, null=True, blank=True)
+    sector = models.CharField(max_length=25, null=True, blank=True)
+    semester = models.CharField(max_length=5, null=True, blank=True)
     coefficient = models.IntegerField(null=True, blank=True)
     ue = models.CharField(max_length=5, null=True, blank=True)
-
     def __str__(self):
         return self.nom_matiere
 
@@ -41,7 +52,6 @@ class Student(models.Model):
     field_of_study = models.CharField(max_length=5)
     groupe_tp = models.CharField(max_length=5, null=True, blank=True)
     groupe_td = models.CharField(max_length=5, null=True, blank=True)
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -80,3 +90,6 @@ def assign_student_groups(sender, instance, created, **kwargs):
             instance.groups.add(td_group)
         if tp_group:
             instance.groups.add(tp_group)
+
+
+
