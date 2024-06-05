@@ -70,5 +70,11 @@ python manage.py runserver
 ou 
 
 ```
-docker compose -f sonic/docker-compose.yaml up -d --build backend
+docker compose -f "docker-compose.yaml" up -d --build
+```
+
+pour l'arrèter
+
+```
+docker-compose.yaml' --project-name 'projet_1a_ir2' down
 ```
