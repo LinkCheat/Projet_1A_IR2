@@ -1,31 +1,32 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
-@csrf_exempt
-def login_view(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
+class LoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
         email = data.get('email')
         password = data.get('password')
+
+        if not email or not password:
+            return Response({'message': 'Adresse e-mail et mot de passe sont requis'}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             user = User.objects.get(email=email)
             username = user.username
         except User.DoesNotExist:
-            return JsonResponse({'message': 'Adresse e-mail ou mot de passe incorrect'}, status=400)
-        
+            return Response({'message': 'Adresse e-mail ou mot de passe incorrect'}, status=status.HTTP_400_BAD_REQUEST)
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return JsonResponse({'message': 'Connexion réussie'})
+            return Response({'message': 'Connexion réussie'}, status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'message': 'Adresse e-mail ou mot de passe incorrect'}, status=400)
-    return JsonResponse({'message': 'Requête invalide'}, status=400)
+            return Response({'message': 'Adresse e-mail ou mot de passe incorrect'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # exemple de vue API 
