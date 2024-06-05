@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 @csrf_exempt
 def login_view(request):
@@ -26,10 +28,14 @@ def login_view(request):
     return JsonResponse({'message': 'Requête invalide'}, status=400)
 
 
+
+@api_view(['GET'])
+def hello_world(request):
+    return Response({'message': 'Hello, world from Django API!'})
+
+
 def index(request):
     return render(request, 'index.html')
-
-
 
 def error_400(request, exception):
     return render(request, 'epresence_api/400.html', status=400)
