@@ -1,9 +1,54 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import User, AbstractUser, Group, Permission
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    def str(self):
+        return self.user.email
 
+class Hourly(models.Model):
+    date = models.DateField()
+    motif = models.CharField(max_length=100)
+    attendance = models.BooleanField()
+    def str(self):
+        return self.motif
+
+class Student(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student')
+    note = models.FloatField()
+    attendances = models.ManyToManyField(Hourly, related_name='attendances')
+    def str(self):
+        return self.user.user.email
+
+class Sector(models.Model):
+    name = models.CharField(max_length=100)
+    coefficient = models.FloatField()
+    classe = models.ManyToManyField(Student, related_name='classe')
+    def str(self):
+        return self.name
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+    sector = models.ManyToManyField(Sector, related_name='sector')
+    def str(self):
+        return self.name
+
+class Professor(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='professor')
+    subject = models.ManyToManyField(Subject, related_name='subject')
+    def str(self):
+        return self.user.user.email
+
+class Supervisor(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='supervisor')
+    professors = models.ManyToManyField(Professor, related_name='professor')
+    def str(self):
+        return self.user.user.email
+
+
+"""
 class Supervisor(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
@@ -69,7 +114,7 @@ def assign_student_groups(sender, instance, created, **kwargs):
 
         instance.groups.add(td_group)
         instance.groups.add(tp_group)
-
+"""
 
 
 
