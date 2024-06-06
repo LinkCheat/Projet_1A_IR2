@@ -5,8 +5,8 @@ services:
     container_name: Sonic_mysql_db
     restart: always                       
     environment:
-      MYSQL_DATABASE: 'test'              
-      MYSQL_USER: 'sample'                
+      MYSQL_DATABASE: 'database'              
+      MYSQL_USER: 'user'                
       MYSQL_PASSWORD: 'password'          
       MYSQL_ROOT_PASSWORD: 'password'     
     ports:
@@ -14,7 +14,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - mysql-db-5.7:/var/lib/mysql
+      - database:/var/lib/mysql
   frontend:
     build: 
       context : ./epresence_frontend
@@ -27,13 +27,13 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      - db
   backend:
     build: 
       context: ./sonic
       dockerfile: dockerfile
     container_name: Sonic_backend
-    command: bash -c "python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "DJANGO_SUPERUSER_PASSWORD=admin \ DJANGO_SUPERUSER_USERNAME=admin \ DJANGO_SUPERUSER_EMAIL=admin@domain.com \ python3 manage.py createsuperuser \ --no-input || python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000"
     restart: always
     volumes:
       - ./sonic:/backend
@@ -45,4 +45,4 @@ services:
       - db
 volumes:
   data:
-  mysql-db-5.7:
+  database:

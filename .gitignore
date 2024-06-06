@@ -6,4 +6,6 @@
 
 /sonic/staticfiles
 
-/e-presence/frontend/Usersyouronpm-cache
+*/Usersyouronpm-cache/
+
+sonic/epresence_api/migrations/*
