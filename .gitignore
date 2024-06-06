@@ -1,10 +1,9 @@
 *.sqlite3
-/sonic/.env
-
-/sonic/staticfiles
-
+*.env
 *.pyc
 
 */nodemodule
+
+/sonic/staticfiles
 
 /e-presence/frontend/Usersyouronpm-cache
