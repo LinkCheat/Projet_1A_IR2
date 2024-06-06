@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes, useRoutes } from "react-router-dom";
 import HelloWorld from "./components/test/test";
 import Login from "./components/login/Login";
 import Error404 from "./components/errors/Error404";
+import './App.css';
+
 
 class App extends Component {
   render() {
