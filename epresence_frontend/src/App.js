@@ -15,7 +15,8 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<HelloWorld />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/hello" element={<HelloWorld />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </BrowserRouter>
