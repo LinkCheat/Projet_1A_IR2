@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.changeContent = function(section) {
         
         const titleMap = {
-            'evaluation': 'Évaluation',
+            'evaluation': 'Saisie Notes',
             'absences': 'Absences',
             'parametres': 'Paramètres'
         };
