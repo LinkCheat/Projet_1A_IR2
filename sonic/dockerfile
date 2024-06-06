@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM python:3.12-alpine
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -7,12 +7,14 @@ ENV PYTHONUNBUFFERED 1
 # Set the working directory
 WORKDIR /backend
 
+RUN apk add --no-cache mariadb-dev build-base
+
 # Install dependencies
-COPY requirements.txt /backend/
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project code into the container
-COPY . /backend/
+COPY . .
 
 EXPOSE 8000
 

@@ -20,23 +20,19 @@ services:
       context : ./epresence_frontend
       dockerfile: dockerfile
     container_name: Sonic_frontend
-    command: bash -c "npm start"
+    command: sh -c "npm start"
     restart: always
-    volumes:
-      - ./epresence_frontend:/frontend
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - backend
   backend:
     build: 
       context: ./sonic
       dockerfile: dockerfile
     container_name: Sonic_backend
-    command: bash -c "DJANGO_SUPERUSER_PASSWORD=admin \ DJANGO_SUPERUSER_USERNAME=admin \ DJANGO_SUPERUSER_EMAIL=admin@domain.com \ python3 manage.py createsuperuser \ --no-input || python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000"
+    command: sh -c "DJANGO_SUPERUSER_PASSWORD=admin \ DJANGO_SUPERUSER_USERNAME=admin \ DJANGO_SUPERUSER_EMAIL=admin@domain.com \ python3 manage.py createsuperuser \ --no-input || python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000"
     restart: always
-    volumes:
-      - ./sonic:/backend
     ports:
       - "8000:8000"
     env_file:
