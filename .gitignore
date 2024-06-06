@@ -5,4 +5,6 @@
 
 *.pyc
 
+*/nodemodule
+
 /e-presence/frontend/Usersyouronpm-cache
