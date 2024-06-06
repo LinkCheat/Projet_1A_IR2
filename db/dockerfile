@@ -1,0 +1,7 @@
+# Use the official MySQL image from Docker Hub
+FROM mysql:8.0
+
+WORKDIR /database
+
+# (Optional) Expose port
+EXPOSE 3306
