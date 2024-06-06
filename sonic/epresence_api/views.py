@@ -50,15 +50,15 @@ class send_verif_email(APIView):
         
         verif_link = request.build_absolute_uri(reverse("epresence_api:empty-verify-view")) + gen_email_token(email)
         email_content = f""" 
-        Email verification
+        Reinitialisation du mot de passe
 
-        To verify your email address, please click on the link below:
+        Pour reinitialiser votre mot de passe, veuillez cliquez sur le lien ci-dessous:
 
-        <a href='{verif_link}'>Verify my email</a>
+        {verif_link}
         """
 
         is_sent = send_mail(
-            'Verify your email address',
+            'Reinitialiser votre mot de passe',
             '',
             None,
             [email],
