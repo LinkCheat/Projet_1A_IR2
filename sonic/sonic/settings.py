@@ -33,7 +33,6 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-#ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(' ')])
 
 
@@ -82,9 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sonic.wsgi.application'
-
-ALLOWED_HOSTS=[]
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
