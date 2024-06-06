@@ -90,6 +90,17 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': config('MYSQL_DATABASE'),
+#        'USER': config('MYSQL_USER'),
+#        'PASSWORD': config('MYSQL_PASSWORD'),
+#        'HOST': config('DB_HOST', 'db'),
+#        'PORT': config('DB_PORT', '3306'), 
+#    }
+#}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -164,3 +175,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://0.0.0.0:3000"
 ]
+
+CSRF_COOKIE_DOMAIN = "0.0.0.0"
+
+SESSION_COOKIE_DOMAIN = "0.0.0.0" 
