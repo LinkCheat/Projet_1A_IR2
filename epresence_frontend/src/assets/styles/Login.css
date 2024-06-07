@@ -36,7 +36,7 @@
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: green; /* vert écologique */
+  background-color: #28a745; /* vert écologique */
   color: white;
   border: none;
   border-radius: 5px;
@@ -45,7 +45,7 @@
 }
 
 .login-button:hover {
-  background-color: green;
+  background-color: #218838;
 }
 
 .forgot-password-button {

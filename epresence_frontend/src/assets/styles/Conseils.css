@@ -1,11 +1,11 @@
 .conseils-container {
-  background-color: #8FBC8B;
+  background-color: #444; /* gris foncé */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px;
+  width: 600px; /* Augmentez la largeur */
   margin-left: 20px;
-  color: #fff;
+  color: #fff; /* blanc */
 }
 
 .conseils-container h2 {

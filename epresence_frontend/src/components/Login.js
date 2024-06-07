@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../assets/styles/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');  // Ajoutez cette ligne
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [cookies] = useCookies(['csrftoken']);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ajouter la logique d'authentification ici (par exemple, appeler une API)
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const response = await axios.post('http://localhost:8000/api/login/', { email, password }, {
+        headers: {
+          'X-CSRFToken': cookies.csrftoken
+        }
+      });
+      console.log('Login successful:', response.data);
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Login failed:', error.response.data);
+      setError(error.response.data.message);
+    }
   };
 
   const handleForgotPassword = () => {
@@ -19,41 +33,39 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1 className="title">Bienvenue dans E-Presence!</h1>
-      <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="login-button">Login</button>
-          <button
-            type="button"
-            className="forgot-password-button"
-            onClick={handleForgotPassword}
-          >
-            J'ai oublié le mot de passe
-          </button>
-        </form>
-      </div>
+    <div className="login-container">
+      <h2>Login</h2>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="login-button">Login</button>
+        <button
+          type="button"
+          className="forgot-password-button"
+          onClick={handleForgotPassword}
+        >
+          J'ai oublié le mot de passe
+        </button>
+      </form>
     </div>
   );
 };

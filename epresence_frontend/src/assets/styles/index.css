@@ -24,10 +24,7 @@ body {
   height: 100vh;
 }
 h1 {
-  color:green;
+  color:#17B169;
   margin-bottom: 40px;
-  text-align: center;
-  position: absolute;
-  height: 100%;
-  left: 20%;
+  text-align: left;
 }
