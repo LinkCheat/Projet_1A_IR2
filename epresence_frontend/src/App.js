@@ -1,29 +1,30 @@
-// frontend/src/App.js file
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Conseils from './components/Conseils';
+import './assets/styles/App.css';
 
-import React, { Component } from "react";
-import { BrowserRouter, Route, Routes, useRoutes } from "react-router-dom";
-import HelloWorld from "./components/test/test";
-import Login from "./components/login/Login";
-import Error404 from "./components/errors/Error404";
-import './App.css';
-
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Login />} />
-            <Route path="/hello" element={<HelloWorld />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </BrowserRouter>
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </div>
-    );
-  }
+    </Router>
+  );
 }
+
+const Home = () => {
+  return (
+    <div className="home-container">
+      <Conseils />
+      <Login />
+    </div>
+  );
+};
 
 export default App;
 

@@ -1,0 +1,18 @@
+.conseils-container {
+  background-color: #444; /* gris foncé */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px; /* Augmentez la largeur */
+  margin-left: 20px;
+  color: #fff; /* blanc */
+}
+
+.conseils-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.conseils-container p {
+  margin: 10px 0;
+}
