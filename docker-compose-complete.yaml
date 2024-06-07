@@ -1,16 +1,30 @@
 version: '3'
 services:
+  db:
+    image: mysql:5.7
+    container_name: Sonic_mysql_db
+    restart: always                       
+    environment:
+      MYSQL_DATABASE: 'database'              
+      MYSQL_USER: 'user'                
+      MYSQL_PASSWORD: 'password'          
+      MYSQL_ROOT_PASSWORD: 'password'       
+    ports:
+      - '3306:3306'                       
+    volumes:
+      - database:/var/lib/mysql
   frontend:
     build: 
       context : ./epresence_frontend
       dockerfile: dockerfile
     container_name: Sonic_frontend
     command: sh -c "npm start"
-    restart: always
+    restart: always  
     ports:
       - "3000:3000"
     depends_on:
       - backend
+    
   backend:
     build: 
       context: ./sonic
@@ -22,3 +36,7 @@ services:
       - "8000:8000"
     env_file:
       - ./.env
+    depends_on:
+      - db
+volumes:
+  database:
