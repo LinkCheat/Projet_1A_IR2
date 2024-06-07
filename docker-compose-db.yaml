@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:5.7
     container_name: Sonic_mysql_db
-    restart: always                       
+    restart: always                      
     environment:
       MYSQL_DATABASE: 'database'              
       MYSQL_USER: 'user'                
