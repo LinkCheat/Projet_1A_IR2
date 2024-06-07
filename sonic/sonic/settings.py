@@ -155,12 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# whitenoise config
-
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-#STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -170,7 +165,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0:3000"
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://0.0.0.0:3000','http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://localhost','http://localhost:3000','http://0.0.0.0','http://127.0.0.1']
 
 CSRF_COOKIE_DOMAIN = "localhost"
 

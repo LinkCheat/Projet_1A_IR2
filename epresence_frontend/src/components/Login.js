@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/styles/Login.css';
@@ -10,16 +9,10 @@ const Login = () => {
   const [error, setError] = useState('');  // Ajoutez cette ligne
   const navigate = useNavigate();
 
-  const [cookies] = useCookies(['csrftoken']);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', { email, password }, {
-        headers: {
-          'X-CSRFToken': cookies.csrftoken
-        }
-      });
+      const response = await axios.post('http://localhost:8000/api/login/', { email, password }, {});
       console.log('Login successful:', response.data);
       navigate('/dashboard');
     } catch (error) {
