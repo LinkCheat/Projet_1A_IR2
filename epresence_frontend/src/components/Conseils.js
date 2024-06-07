@@ -34,10 +34,9 @@ const Conseils = () => {
 
   return (
     <div className="conseils-container">
-      <h2>Conseil Environnemental</h2>
+      <h2>Conseils, Informations et Consignes Environnementales</h2>
       <div>
-        <strong>{data[currentIndex].Sujet}</strong>
-        <p>{data[currentIndex].Conseil}</p>
+        <strong>{data[currentIndex].Conseil}</strong>
         <p>{data[currentIndex].Détails}</p>
       </div>
     </div>

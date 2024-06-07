@@ -1,20 +1,10 @@
-body {
-  background-color: #333; /* Fond de page gris foncé */
-  display: flex;
-  justify-content: flex-end; /* Aligner le contenu à droite */
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  color: #f0f0f0; /* Couleur du texte blanc cassé */
-}
-
 .login-container {
   background-color: #555; /* gris moyen */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px; /* Augmentez cette valeur pour rendre le conteneur plus large */
-  margin-right: 180px; /* Espacement par rapport au bord droit */
+  width: 400px;
+  margin: 0 auto;
 }
 
 .login-container h2 {
@@ -56,4 +46,20 @@ body {
 
 .login-button:hover {
   background-color: #218838;
+}
+
+.forgot-password-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6c757d; /* gris pour le bouton */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.forgot-password-button:hover {
+  background-color: #5a6268;
 }
