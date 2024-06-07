@@ -5,6 +5,8 @@ import Conseils from './components/Conseils';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard';
 import './assets/styles/App.css';
+import AccueilEtudiant from "./components/accueil-e";
+import Grades from "./components/grades";
 
 function App() {
   return (
@@ -14,6 +16,9 @@ function App() {
           <Route path="/login" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/accueil-etu" element={<AccueilEtudiant />} />
+          <Route path="/grades" element={<Grades />} />
+
         </Routes>
       </div>
     </Router>
@@ -30,4 +35,3 @@ const Home = () => {
 };
 
 export default App;
-
