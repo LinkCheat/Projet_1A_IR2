@@ -5,7 +5,7 @@ services:
       context : ./epresence_frontend
       dockerfile: dockerfile
     container_name: Sonic_frontend
-    command: bash -c "npm start"
+    command: sh -c "npm start"
     restart: always
     ports:
       - "3000:3000"

@@ -12,11 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from decouple import config
 
-SECRET_KEY = config('SECRET_KEY')
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(' ')])
-
-
 
 from pathlib import Path
 import os
