@@ -53,7 +53,6 @@ class send_verif_email(APIView):
         if not email:
             return Response({'message': 'Adresse e-mail requise'}, status=status.HTTP_400_BAD_REQUEST)
         
-        user = get_object_or_404(Utilisateur, email=email)
         token = gen_email_token(email)
         
         verif_link = request.build_absolute_uri(reverse("reset-password-confirm", args=[token]))

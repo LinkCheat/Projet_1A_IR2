@@ -11,11 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from decouple import config
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b544ac864337a78be45bc3f6b7421843a944f0d6
 from pathlib import Path
 import os
 
