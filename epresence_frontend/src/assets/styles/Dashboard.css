@@ -1,0 +1,48 @@
+body {
+    background-color: #f8f9fa; /* Fond de page clair */
+    color: #333; /* Couleur du texte sombre */
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .dashboard-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Couleur du texte sombre */
+  }
+  
+  .dashboard-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: #fff; /* Fond de la carte */
+    border: 1px solid #ddd; /* Bordure de la carte */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 300px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  .card-text {
+    color: #555;
+  }
+  
