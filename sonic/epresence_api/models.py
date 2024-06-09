@@ -15,19 +15,6 @@ class Absence(models.Model):
     def __str__(self):
         return self.date
 
-class Utilisateur(models.Model):
-    id = models.CharField(db_column='COL 1', max_length=8, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    nom = models.CharField(db_column='COL 2', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    prenom = models.CharField(db_column='COL 3', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    email = models.CharField(db_column='COL 4', max_length=30, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    password = models.CharField(db_column='COL 5', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-
-    class Meta:
-        managed = True
-        db_table = 'utilisateurs'
-        
-    def __str__(self):
-        return self.email
 
 class MatiereIR(models.Model):
     id = models.CharField(db_column='COL 1', max_length=10, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.

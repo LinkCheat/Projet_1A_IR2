@@ -11,7 +11,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
-from .models import Utilisateur
 from django.contrib.auth.hashers import make_password
 from itsdangerous import BadSignature
  
@@ -95,7 +94,7 @@ class ChangePassword(APIView):
             data = TimestampSigner().unsign_object(decoded_data)
             email = data['email']
             
-            user = get_object_or_404(Utilisateur, email=email)
+            user = User.objects.get(email=email)
             user.password = make_password(password)
             user.save()
             return Response({'message': 'Mot de passe modifié avec succès'}, status=status.HTTP_200_OK)
