@@ -9,7 +9,7 @@ import StudentsTable from './components/StudentsTable';
 import AbsencesTable from './components/AbsencesTable';
 import ResultatTable from './components/ResultatTable';
 import './assets/styles/App.css';
-import AccueilEtudiant from "./components/accueile";
+import AccueilEtudiant from "./components/acceuiletudiant";
 import Grades from "./components/grades";
 import Absences from "./components/absences";
 
