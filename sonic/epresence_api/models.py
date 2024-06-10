@@ -30,12 +30,13 @@ class Utilisateur(models.Model):
         return self.email
 
 class MatiereIR(models.Model):
-    id = models.CharField(db_column='COL 1', max_length=10, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    matiere_id = models.CharField(db_column='COL 1', max_length=10, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     nom_matiere = models.CharField(db_column='COL 2', max_length=48, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     semestre = models.CharField(db_column='COL 3', max_length=8, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     coefficient = models.CharField(db_column='COL 4', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     ue = models.CharField(db_column='COL 5', max_length=22, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     total_heures = models.CharField(db_column='COL 6', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    professor_id = models.CharField(db_column='COL 7', max_length=8, blank=True, null=True)
 
     class Meta:
         managed = True

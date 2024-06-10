@@ -37,5 +37,7 @@ services:
       - ./.env
     depends_on:
       - db
+    volumes:
+      - ./bdd/sql_scripts:/backend/sql_scripts
 volumes:
   database:

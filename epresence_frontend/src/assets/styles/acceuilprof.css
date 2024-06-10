@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background-color: #f4f4f4; /* Light gray background */
+}
+
+header {
+  background-color: #004400; /* Dark green */
+  color: white;
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+
+select#year-select {
+  background-color: #006600; /* Medium green */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#user-info span {
+  color: white;
+  margin-right: 20px;
+}
+
+.sidebar.expanded {
+  width: 250px; /* Width of the sidebar when expanded */
+}
+
+
+.sidebar a {
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+.sidebar {
+  width: 0; /* Start with sidebar hidden */
+  background-color: #333333; /* Dark gray */
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: width 0.3s, left 0.3s; /* Transition for toggling visibility */
+  z-index: 1000;
+  padding-top: 100px; /* Extra space for the top bar */
+}
+
+.sidebar a:hover {
+  background-color: #555555;
+}
+
+.sidebar.expanded {
+  width: 250px; /* Width of the sidebar when expanded */
+  left: 0; /* Ensure sidebar aligns correctly when expanded */
+}
+
+.sidebar.expanded {
+  width: 250px;
+}
+
+.main-content {
+  transition: margin-left 0.5s;
+  padding: 40px;
+  padding-top: 70px; /* To avoid overlap with the header */
+  height: calc(100% - 70px);
+  overflow: auto;
+}
+
+.main-content h2, .main-content p {
+  text-align: center;
+  color: #333;
+}
+
+.main-content.shifted {
+  margin-left: 250px;
+}
+
+button#menu-toggle {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1001; /* Plus haut que le z-index de la sidebar */
+}
+
