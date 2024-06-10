@@ -15,13 +15,28 @@ class Absence(models.Model):
     def __str__(self):
         return self.date
 
+class Utilisateur(models.Model):
+    id = models.CharField(db_column='COL 1', max_length=8, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    nom = models.CharField(db_column='COL 2', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    prenom = models.CharField(db_column='COL 3', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    email = models.CharField(db_column='COL 4', max_length=30, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    password = models.CharField(db_column='COL 5', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+
+    class Meta:
+        managed = True
+        db_table = 'utilisateurs'
+        
+    def __str__(self):
+        return self.email
+
 class MatiereIR(models.Model):
-    id = models.CharField(db_column='COL 1', max_length=10, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    matiere_id = models.CharField(db_column='COL 1', max_length=10, blank=True, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     nom_matiere = models.CharField(db_column='COL 2', max_length=48, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     semestre = models.CharField(db_column='COL 3', max_length=8, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     coefficient = models.CharField(db_column='COL 4', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     ue = models.CharField(db_column='COL 5', max_length=22, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     total_heures = models.CharField(db_column='COL 6', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    professor_id = models.CharField(db_column='COL 7', max_length=8, blank=True, null=True)
 
     class Meta:
         managed = True

@@ -12,9 +12,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', { email, password });
+      const response = await axios.post('http://localhost:8000/api/login/', { email, password }, {});
       console.log('Login successful:', response.data);
-      // Rediriger vers le tableau de bord
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error.response.data);
@@ -27,6 +26,7 @@ const Login = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div>
       <h1 className="title">Bienvenue dans E-Presence!</h1>
       <div className="login-container">
@@ -62,6 +62,41 @@ const Login = () => {
           </button>
         </form>
       </div>
+=======
+    <div className="login-container">
+      <h2>Login</h2>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="login-button">Login</button>
+        <button
+          type="button"
+          className="forgot-password-button"
+          onClick={handleForgotPassword}
+        >
+          J'ai oublié le mot de passe
+        </button>
+      </form>
+>>>>>>> 0df8668f4b4815fe58aae52198769059c76b8606
     </div>
   );
 };
