@@ -5,6 +5,7 @@ TRUNCATE matiere;
 TRUNCATE eleve;
 TRUNCATE note;
 TRUNCATE seance;
+TRUNCATE groupe_id_students;
 TRUNCATE groupe;
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `last_name`, `first_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
