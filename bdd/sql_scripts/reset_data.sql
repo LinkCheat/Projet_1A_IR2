@@ -1,8 +1,9 @@
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE absence;
 TRUNCATE auth_user;
-TRUNCATE matiere_IR;
+TRUNCATE matiere;
 TRUNCATE table_IR;
+TRUNCATE note;
 
 INSERT INTO `absence` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`) VALUES
 ('1', '22304059', '2024-05-01', '1', 'Rendez-vous médical'),
@@ -80,7 +81,7 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 (240, 'pbkdf2_sha256$390000$ncxnQgre9shmc2mElKKFyk$lVF4LNHouoEt9CSH4TGv/NrLHopb4/nxJ+Q2fHxs1Lo=', NULL, 0, '10', 'GEYER', 'Cyril', 'cyril.geyer@uha.fr', 0, 1, '2024-06-06 08:55:18.022235'),
 (241, 'pbkdf2_sha256$390000$Y8bHEanceFWuk60WRHrEmN$NXg2oGMTxhX5bU0XGwUmahNX2z1EaYp7Jtf70VZm8Ik=', NULL, 0, '11', 'WEBER', 'Jonathan', 'jonathan.weber@uha.fr', 0, 1, '2024-06-06 08:55:18.152539');
 
-INSERT INTO `matiere_IR` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`) VALUES
+INSERT INTO `matiere` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`) VALUES
 ('IR-5.1', 'Immersion', 'S5', 4, 'IR_UE1_Fondamentaux_S5', 70, '00001'),
 ('IR-5.2.1', 'Mathématiques discrètes I', 'S5', 2, 'IR_UE2_Analyse_S5', 20, '00002'),
 ('IR-5.2.2', 'Mathématiques discrètes II', 'S5', 2, 'IR_UE2_Analyse_S5', 24, '00003'),
@@ -184,3 +185,24 @@ INSERT INTO `table_IR` (`COL 1`, `COL 2`, `COL 3`) VALUES
 ('22303904', 'TD1', 'TP3'),
 ('22303848', 'TD1', 'TP3');
 
+INSERT INTO `notesir` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`) VALUES
+('22304059', 'IR-5.1', 15.50, '2024-06-10', 'Partiel', 'Très bien'),
+('22104670', 'IR-5.2.1', 12.00, '2024-06-11', 'TP', 'Peut mieux faire'),
+('22304715', 'IR-5.2.2', 8.00, '2024-06-12', 'Partiel', 'À améliorer'),
+('22305104', 'IR-5.2.3', 17.00, '2024-06-13', 'Partiel', 'Excellent'),
+('22204595', 'IR-5.2.4', 11.00, '2024-06-14', 'TP', 'Moyen'),
+('22104745', 'IR-5.3.1', 14.00, '2024-06-15', 'Partiel', 'Bien fait'),
+('22303556', 'IR-5.3.2', 13.00, '2024-06-16', 'TP', 'Correct'),
+('22104710', 'IR-5.3.3', 16.00, '2024-06-17', 'Partiel', 'Très bon'),
+('22304466', 'IR-5.3.4', 10.00, '2024-06-18', 'TP', 'Insuffisant'),
+('22304010', 'IR-5.3.5', 18.00, '2024-06-19', 'Partiel', 'Parfait'),
+('22303900', 'IR-6.1', 9.00, '2024-06-20', 'TP', 'Passable'),
+('22304669', 'IR-6.2', 16.00, '2024-06-21', 'Partiel', 'Impressionnant'),
+('22304463', 'IR-6.3', 14.00, '2024-06-22', 'TP', 'Bon travail'),
+('22104716', 'IR-7.1', 6.00, '2024-06-23', 'Partiel', 'Réviser'),
+('22304105', 'IR-7.2', 19.00, '2024-06-24', 'Partiel', 'Presque parfait'),
+('22304137', 'IR-8.1', 13.00, '2024-06-25', 'TP', 'Solide'),
+('21901399', 'IR-8.2', 7.50, '2024-06-26', 'Partiel', 'À concentrer'),
+('22104720', 'IR-6.1.1', 10.00, '2024-06-27', 'TP', 'Moyen'),
+('22000139', 'IR-6.1.2', 12.50, '2024-06-28', 'Partiel', 'Adéquat'),
+('22304055', 'IR-6.1.4', 17.50, '2024-06-30', 'Partiel', 'Très haut niveau');

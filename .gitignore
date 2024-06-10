@@ -1,11 +1,13 @@
 *.sqlite3
 *.env
 *.pyc
+*.package-lock.json
 
 */nodemodule
 
 /sonic/staticfiles
 
 */Usersyouronpm-cache/
+
 
 sonic/epresence_api/migrations/*
