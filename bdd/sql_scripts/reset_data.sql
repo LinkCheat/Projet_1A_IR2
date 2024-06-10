@@ -185,7 +185,7 @@ INSERT INTO `table_IR` (`COL 1`, `COL 2`, `COL 3`) VALUES
 ('22303904', 'TD1', 'TP3'),
 ('22303848', 'TD1', 'TP3');
 
-INSERT INTO `notesir` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`) VALUES
+INSERT INTO `note` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`) VALUES
 ('22304059', 'IR-5.1', 15.50, '2024-06-10', 'Partiel', 'Très bien'),
 ('22104670', 'IR-5.2.1', 12.00, '2024-06-11', 'TP', 'Peut mieux faire'),
 ('22304715', 'IR-5.2.2', 8.00, '2024-06-12', 'Partiel', 'À améliorer'),
