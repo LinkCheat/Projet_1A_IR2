@@ -40,7 +40,7 @@ class MatiereIR(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'matiere_IR'
+        db_table = 'matiere'
         
     def __str__(self):
         return self.nom_matiere
@@ -57,3 +57,22 @@ class TableIR(models.Model):
         
     def __str__(self):
         return self.id
+    
+
+class NoteIR(models.Model):
+    student_id = models.CharField(db_column='COL 1', max_length=8, blank=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    matiere_id = models.CharField(db_column='COL 2', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    note = models.FloatField(db_column='COL 3', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    date_evaluation = models.CharField(db_column='COL 4', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    type_evaluation = models.CharField(db_column='COL 5', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    remarques = models.CharField(db_column='COL 6', max_length=60, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+
+    class Meta:
+        managed = True
+        db_table = 'note'
+        constraints = [
+            models.UniqueConstraint(fields=['student_id', 'matiere_id'], name='unique_student_matiere')
+        ]
+        
+    def __str__(self):
+        return self.student_id + ' ' + self.matiere_id
