@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: Sonic_mysql_db
+    restart: always                      
+    environment:
+      MYSQL_DATABASE: 'database'              
+      MYSQL_USER: 'user'                
+      MYSQL_PASSWORD: 'password'          
+      MYSQL_ROOT_PASSWORD: 'password'   
+    ports:
+      - '3306:3306'                       
+    expose:
+      - '3306'
+    volumes:
+      - database:/var/lib/mysql
+volumes:
+  database:

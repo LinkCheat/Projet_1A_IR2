@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: Sonic_mysql_db
+    restart: always                       
+    environment:
+      MYSQL_DATABASE: 'database'              
+      MYSQL_USER: 'user'                
+      MYSQL_PASSWORD: 'password'          
+      MYSQL_ROOT_PASSWORD: 'password'       
+    ports:
+      - '3306:3306'                       
+    volumes:
+      - database:/var/lib/mysql
+  frontend:
+    build: 
+      context : ./epresence_frontend
+      dockerfile: dockerfile
+    container_name: Sonic_frontend
+    command: sh -c "npm start"
+    restart: always  
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+  backend:
+    build: 
+      context: ./sonic
+      dockerfile: dockerfile
+    container_name: Sonic_backend
+    command: sh -c "python3 manage.py makemigrations --noinput && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput  && mysql -h Sonic_mysql_db -u user -ppassword --port 3306 database < ./sql_scripts/reset_data.sql && python3 manage.py runserver 0.0.0.0:8000"
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    volumes:
+      - ./bdd/sql_scripts:/backend/sql_scripts
+volumes:
+  database:
