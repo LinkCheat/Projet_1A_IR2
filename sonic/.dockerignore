@@ -1,0 +1,6 @@
+.dockerignore
+
+dockerfile
+
+/staticfiles
+/static/react/

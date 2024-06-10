@@ -1,0 +1,83 @@
+body {
+  background-color: #333; /* Fond de page gris foncé */
+  color: #f0f0f0; /* Couleur du texte blanc cassé */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-between; /* Aligne les composants avec un espace entre eux */
+  align-items: center;
+  height: 100vh;
+  padding: 0 220px; /* Ajoute un peu de marge sur les côtés */
+}
+
+.conseils-container {
+  background-color: #444; /* gris foncé */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 900px; /* Augmentez la largeur */
+  margin-right: 20px;
+  color: #fff; /* blanc */
+}
+
+.conseils-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.conseils-container p {
+  margin: 10px 0;
+}
+
+.login-container {
+  background-color: #555; /* gris moyen */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Augmentez cette valeur pour rendre le conteneur plus large */
+  margin-left: 20px; /* Espacement par rapport au bord gauche */
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff; /* Couleur du texte blanc */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ddd; /* Couleur du texte gris clair */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #777; /* gris foncé pour la bordure */
+  border-radius: 4px;
+  background-color: #444; /* gris foncé pour le fond */
+  color: #fff; /* blanc pour le texte */
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745; /* vert écologique */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background-color: #218838;
+}
