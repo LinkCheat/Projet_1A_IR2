@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../assets/styles/acceuil-e.module.css';
+import styles from '../assets/styles/acceuile.module.css';
 
 const AccueilEtudiant = () => {
   return (
-    <div className={styles.acceuil-eContainer}>
+    <div className={styles.acceuileContainer}>
       <div className="container mt-5 d-flex flex-column align-items-center">
         <h1 className="mb-4 page-title">Mon Espace Étudiant</h1>
         <div className="row justify-content-end mb-3">
