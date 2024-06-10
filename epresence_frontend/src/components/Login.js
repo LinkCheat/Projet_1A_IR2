@@ -12,9 +12,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', { email, password });
+      const response = await axios.post('http://localhost:8000/api/login/', { email, password }, {});
       console.log('Login successful:', response.data);
-      // Rediriger vers le tableau de bord
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error.response.data);

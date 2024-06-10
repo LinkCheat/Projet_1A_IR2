@@ -63,18 +63,16 @@ npm install axios
 ## Lancer le serveur
 
 ```
-python manage.py collectstatic
-python manage.py runserver
-```
-
-ou 
-
-```
-docker compose -f "docker-compose.yaml" up -d --build
+docker compose -f "docker-compose-complete.yaml" up -d --build
 ```
 
 pour l'arrèter
 
 ```
-docker-compose.yaml' --project-name 'projet_1a_ir2' down
+docker-compose-complete.yaml' --project-name 'projet_1a_ir2' down
+```
+## Remettre à zéro la base de donnée
+
+```
+docker volume rm projet_1a_ir2_database
 ```
