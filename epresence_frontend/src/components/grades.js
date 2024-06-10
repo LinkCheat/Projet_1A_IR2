@@ -1,7 +1,7 @@
 // Grades.js
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/grades.css';
+import styles from '../assets/styles/grades.module.css';
 
 const Grades = () => {
   const [isDashboardVisible, setDashboardVisible] = useState(false);
@@ -68,7 +68,10 @@ const Grades = () => {
   };
 
   return (
-    <div className={`dashboard ${isDashboardVisible ? 'visible' : 'hidden'}`}>
+
+    <div className={styles.gradesContainer}>
+
+      <div className={`dashboard ${isDashboardVisible ? 'visible' : 'hidden'}`}>
       <div className="sidebar">
         <h2>Menu</h2>
         <ul>
@@ -104,7 +107,9 @@ const Grades = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+
+    </div>    
   );
 };
 

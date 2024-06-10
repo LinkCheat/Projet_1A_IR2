@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../assets/styles/Login.css';
+import styles from '../assets/styles/Login.module.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={styles.LoginContainer}>
       <h2>Login</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
