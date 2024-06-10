@@ -69,7 +69,7 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 (240, 'pbkdf2_sha256$390000$ncxnQgre9shmc2mElKKFyk$lVF4LNHouoEt9CSH4TGv/NrLHopb4/nxJ+Q2fHxs1Lo=', NULL, 0, '10', 'GEYER', 'Cyril', 'cyril.geyer@uha.fr', 0, 1, '2024-06-06 08:55:18.022235'),
 (241, 'pbkdf2_sha256$390000$Y8bHEanceFWuk60WRHrEmN$NXg2oGMTxhX5bU0XGwUmahNX2z1EaYp7Jtf70VZm8Ik=', NULL, 0, '11', 'WEBER', 'Jonathan', 'jonathan.weber@uha.fr', 0, 1, '2024-06-06 08:55:18.152539');
 
-INSERT INTO `matiere` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`) VALUES
+INSERT INTO `matiere` (`Id`, `Matière`, `Semestre`, `Coefficient`, `UE`, `Total d'heures`, `Professeur`) VALUES
 ('IR-5.1', 'Immersion', 'S5', 4, 'IR_UE1_Fondamentaux_S5', 70, 231),
 ('IR-5.2.1', 'Mathématiques discrètes I', 'S5', 2, 'IR_UE2_Analyse_S5', 20, 232),
 ('IR-5.2.2', 'Mathématiques discrètes II', 'S5', 2, 'IR_UE2_Analyse_S5', 24, 233),
@@ -124,7 +124,7 @@ INSERT INTO `matiere` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `CO
 ('IR-8.2.3', 'Deep Learning I', 'S8', 2, 'IR_UE2_Data_S8', 24, 232),
 ('IR-8.2.4', 'Mathématiques pour les datasciences', 'S8', 2, 'IR_UE2_Data_S8', 28, 233);
 
-INSERT INTO `note` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`) VALUES
+INSERT INTO `note` (`Etudiant`, `Matière`, `Note`, `Date d'évaluation`, `Type d'évaluation`, `Remarque`) VALUES
 (184, 'IR-5.1', 15.50, '2024-06-10', 'Partiel', 'Très bien'),
 (185, 'IR-5.2.1', 12.00, '2024-06-11', 'TP', 'Peut mieux faire'),
 (186, 'IR-5.2.2', 8.00, '2024-06-12', 'Partiel', 'À améliorer'),
@@ -146,7 +146,7 @@ INSERT INTO `note` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`) VALUES
 (202, 'IR-6.1.2', 12.50, '2024-06-28', 'Partiel', 'Adéquat'),
 (203, 'IR-6.1.4', 17.50, '2024-06-30', 'Partiel', 'Très haut niveau');
 
-INSERT INTO `groupe` (`COL 2`) VALUES
+INSERT INTO `groupe` (`Groupe`) VALUES
 ('A1_IR'),
 ('A1_IR_TD1'),
 ('A1_IR_TD2'),
@@ -297,56 +297,56 @@ INSERT INTO `groupe_id_students` (`grouptptd_id`, `user_id`) VALUES
 (4, 229),
 (5, 230);
 
-INSERT INTO `eleve` (`COL 1`, `COL 2`, `COL 3`) VALUES
-(184, 2, 4),
-(185, 3, 5),
-(186, 2, 6),
-(187, 3, 4),
-(188, 2, 5),
-(189, 3, 6),
-(190, 2, 4),
-(191, 3, 5),
-(192, 2, 6),
-(193, 3, 4),
-(194, 2, 5),
-(195, 3, 6),
-(196, 2, 4),
-(197, 3, 5),
-(198, 2, 6),
-(199, 3, 4),
-(200, 2, 5),
-(201, 3, 6),
-(202, 2, 4),
-(203, 3, 5),
-(204, 2, 6),
-(205, 3, 4),
-(206, 2, 5),
-(207, 3, 6),
-(208, 2, 4),
-(209, 3, 5),
-(210, 2, 6),
-(211, 3, 4),
-(212, 2, 5),
-(213, 3, 6),
-(214, 2, 4),
-(215, 3, 5),
-(216, 2, 6),
-(217, 3, 4),
-(218, 2, 5),
-(219, 3, 6),
-(220, 2, 4),
-(221, 3, 5),
-(222, 2, 6),
-(223, 3, 4),
-(224, 2, 5),
-(225, 3, 6),
-(226, 2, 4),
-(227, 3, 5),
-(228, 2, 6),
-(229, 3, 4),
-(230, 2, 5);
+INSERT INTO `eleve` (`Etudiant`, `Classe`, `Groupe TD`, `Groupe TP`) VALUES
+(184, 1, 2, 4),
+(185, 1, 3, 5),
+(186, 1, 2, 6),
+(187, 1, 3, 4),
+(188, 1, 2, 5),
+(189, 1, 3, 6),
+(190, 1, 2, 4),
+(191, 1, 3, 5),
+(192, 1, 2, 6),
+(193, 1, 3, 4),
+(194, 1, 2, 5),
+(195, 1, 3, 6),
+(196, 1, 2, 4),
+(197, 1, 3, 5),
+(198, 1, 2, 6),
+(199, 1, 3, 4),
+(200, 1, 2, 5),
+(201, 1, 3, 6),
+(202, 1, 2, 4),
+(203, 1, 3, 5),
+(204, 1, 2, 6),
+(205, 1, 3, 4),
+(206, 1, 2, 5),
+(207, 1, 3, 6),
+(208, 1, 2, 4),
+(209, 1, 3, 5),
+(210, 1, 2, 6),
+(211, 1, 3, 4),
+(212, 1, 2, 5),
+(213, 1, 3, 6),
+(214, 1, 2, 4),
+(215, 1, 3, 5),
+(216, 1, 2, 6),
+(217, 1, 3, 4),
+(218, 1, 2, 5),
+(219, 1, 3, 6),
+(220, 1, 2, 4),
+(221, 1, 3, 5),
+(222, 1, 2, 6),
+(223, 1, 3, 4),
+(224, 1, 2, 5),
+(225, 1, 3, 6),
+(226, 1, 2, 4),
+(227, 1, 3, 5),
+(228, 1, 2, 6),
+(229, 1, 3, 4),
+(230, 1, 2, 5);
 
-INSERT INTO `seance` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL 7`) VALUES
+INSERT INTO `seance` (`Matière`, `Groupe`, `Date`, `Heure début`, `Heure fin`, `Salle`, `Type`) VALUES
 ('IR-6.2.1', 1, '2024-06-10', '08:00', '10:00', 'E25', 'CM'),
 ('IR-6.2.2', 1, '2024-06-10', '10:00', '12:00', 'E25', 'CM'),
 ('IR-6.3.1', 4, '2024-06-10', '14:00', '18:00', 'PC_4', 'TP'),
@@ -359,7 +359,7 @@ INSERT INTO `seance` (`COL 1`, `COL 2`, `COL 3`, `COL 4`, `COL 5`, `COL 6`, `COL
 ('IR-6.3.2', 4, '2024-06-11', '14:00', '18:00', 'PC_3', 'TP'),
 ('IR-6.1.5', 5, '2024-06-11', '14:00', '18:00', 'PC_MASTER', 'TP');
 
-INSERT INTO `absence` (`COL 1`, `COL 2`, `COL 3`) VALUES
+INSERT INTO `absence` (`Etudiant`, `Séance`, `Motif`) VALUES
 ( 209, 1, 'Rendez-vous médical'),
 ( 210, 1, 'Urgence familiale'),
 ( 211, 1, 'Congé maladie'),
