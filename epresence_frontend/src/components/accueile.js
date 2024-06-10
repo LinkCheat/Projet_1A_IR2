@@ -5,7 +5,7 @@ import styles from '../assets/styles/acceuile.module.css';
 
 const AccueilEtudiant = () => {
   return (
-    <div className={styles.acceuileContainer}>
+    <div className={styles.accueileContainer}>
       <div className="container mt-5 d-flex flex-column align-items-center">
         <h1 className="mb-4 page-title">Mon Espace Étudiant</h1>
         <div className="row justify-content-end mb-3">
