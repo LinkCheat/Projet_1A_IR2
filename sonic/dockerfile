@@ -7,7 +7,11 @@ ENV PYTHONUNBUFFERED 1
 # Set the working directory
 WORKDIR /backend
 
+# MySQL client dependencies
 RUN apk add --no-cache mariadb-dev build-base
+
+# mariadb-client is needed for the mysql_config command
+RUN apk add --no-cache mariadb-client && addgroup -S mysql && adduser -S mysql -G mysql
 
 # Install dependencies
 COPY requirements.txt .
@@ -17,5 +21,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 EXPOSE 8000
-
 

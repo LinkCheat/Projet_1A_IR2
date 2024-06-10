@@ -12,7 +12,7 @@ const ResetPassword = () => {
   const handleResetPassword = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/reset-password/', { email });
+      const response = await axios.post('http://localhost:8000/api/reset-pass/', { email });
       setMessage(response.data.message);
     } catch (error) {
       setMessage(error.response.data.message);
