@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../assets/styles/acceuile.module.css';
+import styles from '../assets/styles/accueile.module.css';
 
 const AccueilEtudiant = () => {
   return (
