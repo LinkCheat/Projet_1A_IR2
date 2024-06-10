@@ -7,5 +7,5 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name='api-login'),
     path('reset-pass/', views.send_verif_email.as_view(), name='api-resetpass'),
     path('verify/', views.empty_verify_view, name='empty-verify-view'),  # Assurez-vous d'avoir cette ligne
-    path('change-pass/',views.ChangePassword.as_view(), name='api-changepass'),
+    path('change-pass/<str:token>/',views.ChangePassword.as_view(), name='change-pass'),
 ]
