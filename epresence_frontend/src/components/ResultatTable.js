@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import '../assets/styles/StudentsTable.css';
+import styles from '../assets/styles/ResultatTable.module.css';
 
 // Fonction pour générer des données aléatoires
 const generateRandomResults = (num) => {
@@ -49,7 +49,7 @@ const StudentResultsTable = () => {
   const currentPageData = results.slice(offset, offset + itemsPerPage);
 
   return (
-    <div>
+    <div className={styles.ResultTableContainer}>
       <form>
         <label>
           Année Universitaire:

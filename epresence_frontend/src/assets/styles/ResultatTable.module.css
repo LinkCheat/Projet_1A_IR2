@@ -1,4 +1,6 @@
-body {
+.ResultatTableContainer{
+
+  body {
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
@@ -46,6 +48,10 @@ body {
     color: #fff;
   }
   
+  td input[type="checkbox"] {
+    transform: scale(1.5); /* Agrandir les cases à cocher */
+  }
+  
   .button-container {
     display: flex;
     justify-content: flex-end;
@@ -90,3 +96,5 @@ body {
   .pagination .active a {
     color: #fff;
   }
+
+}

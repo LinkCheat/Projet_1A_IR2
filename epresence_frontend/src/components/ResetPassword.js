@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/ResetPassword.css'; // Assurez-vous que le fichier CSS est importé
+import styles from '../assets/styles/ResetPassword.module.css'; // Assurez-vous que le fichier CSS est importé
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className={styles.ResetPasswordContainer}>
       <div className="reset-password-container">
         <h2>Réinitialiser le mot de passe</h2>
         <form onSubmit={handleResetPassword}>

@@ -33,7 +33,7 @@ const Conseils = () => {
   }
 
   return (
-    <div className={styles.ConseilContainer}>
+    <div className={styles.ConseilsContainer}>
       <h2>Conseils, Informations et Consignes Environnementales</h2>
       <div>
         <strong>{data[currentIndex].Conseil}</strong>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../assets/styles/StudentsTable.css';  // Assurez-vous que le chemin est correct
+import styles from '../assets/styles/StudentsTable.module.css';  // Assurez-vous que le chemin est correct
 
 
 // Fonction pour générer des données aléatoires
@@ -68,7 +68,7 @@ const StudentsTable = () => {
   const currentPageData = students.slice(offset, offset + itemsPerPage);
 
   return (
-    <div>
+    <div className={styles.StudentsTableContainer}>
       <form>
         <label>
           Années universitaire:
