@@ -9,6 +9,10 @@ import StudentsTable from './components/StudentsTable';
 import AbsencesTable from './components/AbsencesTable';
 import ResultatTable from './components/ResultatTable';
 import './assets/styles/App.css';
+import AccueilEtudiant from "./components/accueil-e";
+import Grades from "./components/grades";
+import Absences from "./components/absences";
+
 
 function App() {
   return (
@@ -18,10 +22,10 @@ function App() {
           <Route path="/login" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/InsererNotes" element={<StudentsTable />} />
-          <Route path="/InsererAbs" element={<AbsencesTable />} />
-          <Route path="/afficherNotes" element={<ResultatTable />} />
+          <Route path="/accueil-etu" element={<AccueilEtudiant />} />
+          <Route path="/grades" element={<Grades />} />
+          <Route path="/absence-etu" element={<Absences />} />
+
         </Routes>
       </div>
     </Router>
@@ -38,4 +42,3 @@ const Home = () => {
 };
 
 export default App;
-

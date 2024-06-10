@@ -1,3 +1,70 @@
+<<<<<<< HEAD
+.login-container {
+  background-color: #555;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: 0 auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ddd;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background-color: green;
+}
+
+.forgot-password-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.forgot-password-button:hover {
+  background-color: #5a6268;
+}
+=======
 .login-container {
   background-color: #555; /* gris moyen */
   padding: 20px;
@@ -63,3 +130,4 @@
 .forgot-password-button:hover {
   background-color: #5a6268;
 }
+>>>>>>> 0df8668f4b4815fe58aae52198769059c76b8606
