@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Notes</title>
+    <link rel="stylesheet" href="C:\Users\Hp\Desktop\Projet\Projet_1A_IR2\epresence_frontend\src\assets\styles\interfacenote.css">
+</head>
+<body>
+    <div id="sidebar" class="sidebar">
+        <button id="menu-toggle">☰</button>
+        <a href="acceuilprof.html">Accueil</a>
+        <a href="InterfaceNote.html">Évaluation</a>
+        <a href="InterfaceAbsence.html">Absences</a>
+        <a href="parametres.html">Paramètres</a>
+    </div>
+    <header>
+        <button disabled>2023/2024</button>
+        <button disabled>IR</button>
+        <select id="matiere-select">
+            <option value="maths">Mathématiques</option>
+            <option value="info">Informatique</option>
+            <!-- More subjects -->
+        </select>
+        <select id="type-control-select">
+            <option value="tp">TP</option>
+            <option value="partiel">Partiel</option>
+        </select>
+    </header>
+    <div class="table-container">
+        <table id="student-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Groupe TD</th>
+                    <th>Groupe TP</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+    <div class="action-buttons">
+        <button id="edit-button">Modifier</button>
+        <button id="save-button">Enregistrer</button>
+        <button id="validate-button">Valider</button>
+    </div>
+    <script src="C:\Users\Hp\Desktop\Projet\Projet_1A_IR2\epresence_frontend\src\pages\interfacenote.js"></script>
+</body>
+</html>
