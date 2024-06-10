@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import '../assets/styles/StudentsTable.css';
+import styles from '../assets/styles/AbsencesTable.module.css';
 
 // Fonction pour générer des données aléatoires
 const generateRandomStudents = (num) => {
@@ -63,7 +63,7 @@ const AbsencesTable = () => {
   const currentPageData = students.slice(offset, offset + itemsPerPage);
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <form>
         <label>
           Année Universitaire:

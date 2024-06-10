@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../assets/styles/acceuilprof.css' 
+import styles from '../assets/styles/acceuilprof.module.css';
 
 function Dashboard() {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
@@ -26,7 +26,7 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <header>
         <button id="menu-toggle" onClick={toggleSidebar}>☰</button>
         <select id="year-select">

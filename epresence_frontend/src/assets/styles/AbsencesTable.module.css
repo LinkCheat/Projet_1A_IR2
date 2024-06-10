@@ -1,4 +1,6 @@
-body {
+.AbsencesTableContainer{
+
+  body {
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
@@ -85,4 +87,5 @@ body {
   .pagination .active a {
     color: #fff;
   }
-  
+
+}
