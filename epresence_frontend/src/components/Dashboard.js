@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/Dashboard.css';
+import styles from '../assets/styles/Dashboard.module.css';
 
 const Dashboard = () => {
   return (
-    <div className="dashboard-container">
+    <div className={styles.DashboardContainer}>
       <h2>Tableau de bord</h2>
       <div className="dashboard-content">
         <div className="card">

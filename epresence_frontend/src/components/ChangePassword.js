@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/ChangePassword.css'; // Assurez-vous que le fichier CSS est importé
+import styles from '../assets/styles/ChangePassword.module.css';
 
 const ChangePassword = () => {
   const [password, setPassword] = useState('');
@@ -28,7 +28,9 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className={styles.changePasswordContainer}>
+
+      <div className="page-container">
       <div className="change-password-container">
         <h2>Changer le mot de passe</h2>
         <form onSubmit={handleChangePassword}>
@@ -56,7 +58,9 @@ const ChangePassword = () => {
         </form>
         {message && <p className="message">{message}</p>}
       </div>
-    </div>
+      </div>
+      
+    </div>    
   );
 };
 

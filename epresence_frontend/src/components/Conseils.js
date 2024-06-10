@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
-import '../assets/styles/Conseils.css';
+import styles from '../assets/styles/Conseils.module.css';
 
 const Conseils = () => {
   const [data, setData] = useState([]);
@@ -33,7 +33,7 @@ const Conseils = () => {
   }
 
   return (
-    <div className="conseils-container">
+    <div className={styles.ConseilContainer}>
       <h2>Conseils, Informations et Consignes Environnementales</h2>
       <div>
         <strong>{data[currentIndex].Conseil}</strong>
