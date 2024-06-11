@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% block styles %}
     <link rel="stylesheet" href="{% static 'epresence_api/styles/Login.css' %}"/>
+    {% endblock %}
     <title>Login Page</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
                 <input class="erreur" type="password" name="password" id="mon-mdp"/>
             </div>
             <div class="form-group">
-                <input type="submit" name="envoi" value="Valider" class="login-button" onclick="clignoter(),clignoterdiv()" />
+                <input type="submit" name="envoi" value="Valider" class="login-button"/>
             </div>
         </form>
     </section>

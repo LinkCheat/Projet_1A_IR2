@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href =  "{% static 'styles/accueil-e.css' %}"/>
+    {% block styles %}
+    <link rel = "stylesheet" href =  "{% static 'epresence_api/styles/accueil-e.css' %}"/>
+    {% endblock %}
     <title>Login Page</title>
 </head>
 <div className="container mt-5 d-flex flex-column align-items-center">
