@@ -69,7 +69,7 @@ const StudentsTable = () => {
 
   return (
     <div>
-      <form>
+      <form className='StudentTable'>
         <label>
           Années universitaire:
           <input
