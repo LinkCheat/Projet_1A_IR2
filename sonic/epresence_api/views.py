@@ -108,7 +108,7 @@ def Login(request):
     
 def LogoutView(request):
     cache.clear()
-    return render(request, 'epresence_api/login.html')
+    return redirect('/')
 
 def empty_verify_view(request):
     return render(request, 'verify.html')
