@@ -8,14 +8,6 @@ import csv
 import io
 from django.http import HttpResponse
 
-def simulationlog(request):
-    cache.set('id','1')
-    cache.set('email', 'joel.dion@uha.fr')
-    cache.set('first_name', 'Joel')
-    cache.set('last_name', 'DION')
-    return render(request, 'epresence_api/prof.html')
-    
-
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
 def csv_cache(name, titre_csv, data):
@@ -93,7 +85,7 @@ def Login(request):
             data = User.objects.all().values_list('username','first_name','last_name','email')
             csv_cache('test',['id','first_name','last_name','email'],data)
             csv_download_applicate('test')
-            a=user.username
+            a=int(user.username)
             print(a)
             if a<1000:
                 return render(request, 'epresence_api/prof.html')
@@ -101,6 +93,8 @@ def Login(request):
                 return render(request, 'epresence_api/student.html')
         else:
             return render(request, 'epresence_api/login.html')
+    else:
+        return render(request, 'epresence_api/login.html')
 
 def empty_verify_view(request):
     return render(request, 'verify.html')
