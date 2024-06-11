@@ -1,6 +1,7 @@
 *.sqlite3
 *.env
 *.pyc
+
 */package-lock.json
 
 */nodemodule
