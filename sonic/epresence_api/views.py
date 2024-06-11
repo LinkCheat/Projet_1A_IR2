@@ -106,6 +106,12 @@ def Login(request):
     else:
         return render(request, 'epresence_api/login.html')
     
+def HomeView(request):
+
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    #return render(request, 'epresence_api/user.html', {'name':user.first_name})
+    
 def LogoutView(request):
     cache.clear()
     return redirect('/')
