@@ -5,9 +5,9 @@ import '../assets/styles/accueil-e.css';
 
 const AccueilEtudiant = () => {
   return (
-    <div className="container mt-5 d-flex flex-column align-items-center"> {/* Modification ici */}
+    <div className="container mt-5 d-flex flex-column align-items-center">
       <h1 className="mb-4 page-title">Mon Espace Étudiant</h1>
-      <div className="row justify-content-end mb-3"> {/* Modification ici */}
+      <div className="row justify-content-end mb-3">
         <div className="col-md-5">
           <div className="card text-center">
             <div className="card-body">
@@ -17,7 +17,7 @@ const AccueilEtudiant = () => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-end mb-3"> {/* Modification ici */}
+      <div className="row justify-content-end mb-3">
         <div className="col-md-5">
           <div className="card text-center">
             <div className="card-body">
@@ -27,7 +27,7 @@ const AccueilEtudiant = () => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-end"> {/* Modification ici */}
+      <div className="row justify-content-end">
         <div className="col-md-5">
           <div className="card text-center">
             <div className="card-body">

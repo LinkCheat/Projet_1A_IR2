@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Absence,MatiereIR,TableIR
+from .models import Absence,Matiere,Note,Seance,GroupTPTD
 
 
-admin.site.register([Absence,MatiereIR,TableIR])
+admin.site.register([Absence,Matiere,Note,Seance,GroupTPTD])

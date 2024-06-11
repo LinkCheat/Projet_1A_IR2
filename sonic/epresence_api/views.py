@@ -11,9 +11,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
-from .models import Utilisateur
 from django.contrib.auth.hashers import make_password
 from itsdangerous import BadSignature
+from django.views.decorators.csrf import csrf_exempt
  
 
 # API pour la page du login
@@ -47,16 +47,16 @@ def gen_email_token(email):
     return email_verif_token
 
 class send_verif_email(APIView):
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         data = request.data
         email = data.get('email')
         if not email:
             return Response({'message': 'Adresse e-mail requise'}, status=status.HTTP_400_BAD_REQUEST)
         
-        user = get_object_or_404(Utilisateur, email=email)
         token = gen_email_token(email)
         
-        verif_link = request.build_absolute_uri(reverse("reset-password-confirm", args=[token]))
+        verif_link = request.build_absolute_uri(reverse("change-pass", args=[token]))
         email_content = f""" 
         Reinitialisation du mot de passe
 
@@ -96,7 +96,7 @@ class ChangePassword(APIView):
             data = TimestampSigner().unsign_object(decoded_data)
             email = data['email']
             
-            user = get_object_or_404(Utilisateur, email=email)
+            user = User.objects.get(email=email)
             user.password = make_password(password)
             user.save()
             return Response({'message': 'Mot de passe modifié avec succès'}, status=status.HTTP_200_OK)
