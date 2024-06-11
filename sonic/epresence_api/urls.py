@@ -19,7 +19,7 @@ urlpatterns = [
     path('absences/', views.Absences, name='absences'),
     
     
-    path('password/', views.ChangePasswordView),
+    path('password/', views.ChangePasswordView, name='change_password'),
     path('resetpassword/', views.resetPasswordView),
     
     
