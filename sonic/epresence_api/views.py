@@ -189,5 +189,19 @@ def emploi_du_temps_eleve(request):
         csv = get_csv_cache('emploi_du_temps_eleve')
     csv_download_applicate('emploi_du_temps_eleve')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+
+def emploi_du_temps_prof(request):
+    csv = get_csv_cache('emploi_du_temps_prof')
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    matiere = Matiere.objects.get().filter(professeur=user.id)
+    if csv == None:
+        data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        data = data.filter(id_matiere = matiere)
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        csv = get_csv_cache('emploi_du_temps_prof')
+    csv_download_applicate('emploi_du_temps_prof')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         
