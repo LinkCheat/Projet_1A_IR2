@@ -1,45 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
-<html Lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewpot" content="width=device-width,initial-scale=1.0">
-    <title>Get session</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
+    <title>Get Session</title>
 </head>
 <body>
-    <h4>{{first_name}} {{last_name}}</h4>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <table>
-        <thead>
-            <tr>
-                {% for header in csv_data.0.keys %}
-                    <th>{{ header }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in csv_data %}
+    <div class="container">
+        <h4>{{ first_name }} {{ last_name }}</h4>
+        <table>
+            <thead>
                 <tr>
-                    {% for cell in row.values %}
-                        <td>{{ cell }}</td>
+                    {% for header in csv_data.0.keys %}
+                        <th>{{ header }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for row in csv_data %}
+                    <tr>
+                        {% for cell in row.values %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
