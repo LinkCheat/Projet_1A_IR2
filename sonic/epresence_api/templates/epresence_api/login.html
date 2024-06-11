@@ -10,7 +10,8 @@
 </head>
 <body>
     <section class="login-container">
-        <h2>Connecte-toi</h2>
+        <img src="{% static 'epresence_api/images/E-Presence (1).jpg' %}" alt="e-Presence Logo" class="logo">
+        <h2>Mon Espace e-presence</h2>
         <form action='login' method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -19,12 +20,13 @@
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input class="erreur" type="password" name="password" id="mon-mdp"/>
+                <input type="password" name="password" id="mon-mdp" required/>
             </div>
             <div class="form-group">
                 <input type="submit" name="envoi" value="Valider" class="login-button"/>
             </div>
         </form>
+        <a href="#" class="lien vers password ">Mot de passe oublié ?</a>
     </section>
 </body>
 </html>

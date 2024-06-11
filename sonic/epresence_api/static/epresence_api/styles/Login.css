@@ -1,73 +1,84 @@
 body {
-  background-color: #333; /* dark gray background */
+  background-color: #4a4a4a; 
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* full viewport height */
+  height: 100vh;
   margin: 0;
+  font-family: 'Arial', sans-serif; 
 }
 
 .login-container {
-  background-color: #555; /* medium gray */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  background-color: #ffffff; 
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  width: 100%;
+  max-width: 360px; 
+  text-align: center;
+}
+
+.logo {
+  width: 210px; 
+  margin-bottom: 20px;
 }
 
 .login-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff; /* white text color */
+  margin-bottom: 30px;
+  color: #333; 
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  color: #ddd; /* light gray text color */
+  margin-bottom: 8px;
+  color: #555; 
 }
 
 .form-group input {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
   box-sizing: border-box;
-  border: 1px solid #777; /* dark gray border */
-  border-radius: 4px;
-  background-color: #444; /* dark gray background */
-  color: #fff; /* white text color */
+  border: 2px solid #28a745; 
+  border-radius: 6px;
+  background-color: #e8e8e8; 
+  color: #333;
+}
+
+.form-group input:focus {
+  border-color: #28a745;
+  background-color: #fff;
 }
 
 .login-button {
   width: 100%;
-  padding: 10px;
-  background-color: #28a745; /* ecological green */
+  padding: 12px;
+  background-color: #28a745; 
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .login-button:hover {
-  background-color: #218838;
+  background-color: #218838; 
 }
 
-.forgot-password-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #6c757d; /* gray button */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+.forgot-password-link,
+.new-user-link {
+  display: block;
+  margin-top: 15px;
+  color: #28a745; 
+  text-decoration: none;
+  font-size: 14px;
 }
 
-.forgot-password-button:hover {
-  background-color: #218838;
+.forgot-password-link:hover,
+.new-user-link:hover {
+  text-decoration: underline;
 }
