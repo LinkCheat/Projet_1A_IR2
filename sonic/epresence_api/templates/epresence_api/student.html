@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Link to the external stylesheet using Django's static template tag -->
-    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil-e.css' %}">
     {% block styles %}
-    
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil-e.css' %}">
+    {% endblock %}
     <title>Login Page</title>
 </head>
 <body>
@@ -19,29 +20,35 @@
             <a href="{% url 'epresence_api:notes' %}" class="btn btn-primary">Mes notes</a>
             <a href="{% url 'epresence_api:etudiant' %}" class="btn btn-primary">Mon profil</a>
             <a href="{% url 'epresence_api:absences' %}" class="btn btn-primary">Mes absences</a>
+            <a href="{% url 'epresence_api:emploi_eleve' %}" class="btn btn-primary">Mon emploi du temps</a>
         </div>
     </div>
-<<<<<<< HEAD
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- User logo -->
+        <div class="user-logo">
+            <img src="{% static 'epresence_api/images/user_logo.png' %}" alt="User Logo">
+        </div>
+        <!-- App name -->
+        <div class="app-name">
+            <h2>Mon Espace Étudiant</h2>
+        </div>
+        <!-- Student name -->
+        <div class="student-name">
+            <h3>Num. étudiant: {{ user.username }}</h3>
+            <h3> {{ user.first_name }}</h3>
+            <h3> {{ user.last_name }}</h3>
+            
+        </div>
+        <!-- Logout link -->
+        <div class="logout">
+            <a href="/" class="btn btn-danger">Déconnexion</a>
+        </div>
+    </div>
+
+    <style>
+        
+    </style>
 </body>
 </html>
-
-=======
-
-    <!--
-    <div className="row justify-content-end mb-3">
-            <h5 className="card-title">Profil</h5>
-            <a href="{% url 'epresence_api:profil?' %}">Mon profil</a>
-    </div>
-    -->
-
-
-    <div className="row justify-content-end">
-            <h5 className="card-title">Absences</h5>
-            <a href="{% url 'epresence_api:absences' %}">Mes absences</a>
-    </div>
-    <div className="row justify-content-end mb-3">
-      <h5 className="card-title">Profil</h5>
-      <a href="{% url 'epresence_api:emploi_eleve' %}">Mon emploi du temps</a>
-    </div>
-  </div>
->>>>>>> ebd9f84892135cfed69fed77515790246b9ddc98
