@@ -141,20 +141,20 @@ def download_csv(request):
 
 #Note de l'eleve
 def Notes_eleve(request):
-    csv = get_csv_cache('Notes')
+    csv = get_csv_cache('notes')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Note.objects.all().values_list('id_student','note','id_matiere')
         data = data.filter(id_student = user)
         data = data.values_list('id_matiere','note')
-        csv_cache('Notes',['matiere','note'],data)
-        csv = get_csv_cache('Notes')
+        csv_cache('notes',['matiere','note'],data)
+        csv = get_csv_cache('notes')
+    csv_download_applicate('notes')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def Absences(request):
     csv = get_csv_cache('absences')
-    csv_download_applicate('absences')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
@@ -163,12 +163,11 @@ def Absences(request):
         data = data.values_list('seance','motif')
         csv_cache('absences',['seance numéro','motif'],data)
         csv = get_csv_cache('absences')
-        csv_download_applicate('absences')
+    csv_download_applicate('absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def emploi_du_temps_eleve(request):
     csv = get_csv_cache('emploi_du_temps_eleve')
-    csv_download_applicate('emploi_du_temps_eleve')
     id = cache.get('id')
     user = User.objects.get(username=id)
     eleve = Eleve.objects.get(id_student=user.id)
@@ -178,7 +177,7 @@ def emploi_du_temps_eleve(request):
         data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_eleve')
-        csv_download_applicate('emploi_du_temps_eleve')
+    csv_download_applicate('emploi_du_temps_eleve')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         
