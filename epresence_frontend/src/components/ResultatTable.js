@@ -11,19 +11,30 @@ const generateRandomResults = (num) => {
       matiere: `Matière${i}`,
       note_partiel: (Math.random() * 20).toFixed(2),
       note_tp: i % 2 === 0 ? (Math.random() * 20).toFixed(2) : null, // Une note sur deux a une note de TP
-      note_globale: (Math.random() * 20).toFixed(2)
+      note_globale: (Math.random() * 20).toFixed(2),
+      motif_absence: Math.random() > 0.8 ? "Maladie" : "" // 20% chance of absence due to illness
     });
   }
   return results;
 };
 
+
 const StudentResultsTable = () => {
   const [results, setResults] = useState([]);
+  const [absences, setAbsences] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [formFields, setFormFields] = useState({
     anneeUniversitaire: '',
     filiere: 'IR',
   });
+
+  const handleAbsenceChange = (index, value) => {
+    setAbsences(prevAbsences => ({
+      ...prevAbsences,
+      [index]: value
+    }));
+  };
+  
 
   const itemsPerPage = 15;
 
@@ -49,62 +60,31 @@ const StudentResultsTable = () => {
   const currentPageData = results.slice(offset, offset + itemsPerPage);
 
   return (
-    <div>
-      <form>
-        <label>
-          Année Universitaire:
-          <input
-            type="text"
-            name="anneeUniversitaire"
-            value={formFields.anneeUniversitaire}
-            onChange={handleFormChange}
-          />
-        </label>
-        <label>
-          Filière:
-          <input
-            type="text"
-            name="filiere"
-            value={formFields.filiere}
-            readOnly
-          />
-        </label>
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>UE</th>
-            <th>Matière</th>
-            <th>Note Partiel</th>
-            <th>Note TP</th>
-            <th>Note Globale</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentPageData.map((result, index) => (
-            <tr key={index}>
-              <td>{result.ue}</td>
-              <td>{result.matiere}</td>
-              <td>{result.note_partiel}</td>
-              <td>{result.note_tp !== null ? result.note_tp : 'N/A'}</td>
-              <td>{result.note_globale}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <ReactPaginate
-        previousLabel={"previous"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        pageCount={Math.ceil(results.length / itemsPerPage)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination"}
-        activeClassName={"active"}
-      />
+    <div className="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Groupe TD</th>
+                    <th>Groupe TP</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                {/* Dynamic row generation goes here */}
+            </tbody>
+        </table>
+        <div className="button-container">
+            <button>Modifier</button>
+            <button>Enregistrer</button>
+            <button>Valider</button>
+        </div>
     </div>
-  );
+);
+
+  
 };
 
 export default StudentResultsTable;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Note: axios is imported but not used in this example.
 import ReactPaginate from 'react-paginate';
-import '../assets/styles/StudentsTable.css';  // Assurez-vous que le chemin est correct
+import '../assets/styles/StudentsTable.css'; // Ensure the path is correct.
 
-
-// Fonction pour générer des données aléatoires
+// Function to generate random student data
 const generateRandomStudents = (num) => {
   const students = [];
   for (let i = 1; i <= num; i++) {
@@ -17,6 +16,14 @@ const generateRandomStudents = (num) => {
   }
   return students;
 };
+
+// Subject data for the dropdown
+const matieres = [
+  { id: 1, label: "Mathématiques discrètes", value: "mathematiques_discretes" },
+  { id: 2, label: "Programmation fonctionnelle", value: "programmation_fonctionnelle" },
+  { id: 3, label: "Analyse numérique", value: "analyse_numerique" },
+  { id: 4, label: "Algorithmique", value: "algorithmique" }
+];
 
 const StudentsTable = () => {
   const [students, setStudents] = useState([]);
@@ -32,13 +39,12 @@ const StudentsTable = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    // Remplacez la requête API par des données aléatoires
-    const randomStudents = generateRandomStudents(100); // Génère 100 étudiants aléatoires
+    // Replacing the API call with random data generation
+    const randomStudents = generateRandomStudents(100);
     setStudents(randomStudents);
   }, []);
 
   const handleNoteChange = (codeEtudiant, note) => {
-    // Validation pour n'accepter que des chiffres
     if (!isNaN(note) && note.length <= 3) {
       setNotes(prevNotes => ({
         ...prevNotes,
@@ -71,7 +77,7 @@ const StudentsTable = () => {
     <div>
       <form>
         <label>
-          Années universitaire:
+          Année universitaire:
           <input
             type="text"
             name="anneeUniversitaire"
@@ -90,12 +96,17 @@ const StudentsTable = () => {
         </label>
         <label>
           Matière:
-          <input
-            type="text"
+          <select
             name="matiere"
             value={formFields.matiere}
             onChange={handleFormChange}
-          />
+          >
+            {matieres.map(matiere => (
+              <option key={matiere.id} value={matiere.value}>
+                {matiere.label}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Type du contrôle:
