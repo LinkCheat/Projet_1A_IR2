@@ -10,12 +10,12 @@ urlpatterns = [
     path('',views.LoginView),
     path('login',views.Login),
     
-    path('prof/', views.ProfView),
+    path('professeur/', views.ProfView, name='professeur'),
     
     
-    path('student/', views.StudentView, name='student'),
-    path('Note_student/', views.Notes_eleve, name='evaluations'),
-    path('Absence/', views.Absences, name='absences'),
+    path('etudiant/', views.StudentView, name='etudiant'),
+    path('notes/', views.Notes_eleve, name='notes'),
+    path('absences/', views.Absences, name='absences'),
     
     
     path('password/', views.ChangePasswordView),
