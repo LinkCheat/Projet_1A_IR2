@@ -14,7 +14,7 @@
         <div className="card text-center">
           <div className="card-body">
             <h5 className="card-title">Notes</h5>
-            <a href="http://0.0.0.0:8000/api/Note_student/">Mes notes</a>
+            <a href="{% url 'epresence_api:evaluations' %}">Mes notes</a>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div className="card text-center">
           <div className="card-body">
             <h5 className="card-title">Absences</h5>
-            <a href="http://0.0.0.0:8000/api/Absence_student/">Mes absences</a>
+            <a href="{% url 'epresence_api:absences' %}">Mes absences</a>
           </div>
         </div>
       </div>

@@ -13,9 +13,9 @@ urlpatterns = [
     path('prof/', views.ProfView),
     
     
-    path('student/', views.StudentView),
-    path('Note_student/', views.Notes_eleve),
-    path('Absence/', views.Absences),
+    path('student/', views.StudentView, name='student'),
+    path('Note_student/', views.Notes_eleve, name='evaluations'),
+    path('Absence/', views.Absences, name='absences'),
     
     
     path('password/', views.ChangePasswordView),
