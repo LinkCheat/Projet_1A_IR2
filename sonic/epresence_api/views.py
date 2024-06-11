@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -86,13 +86,19 @@ def Login(request):
             cache.set('email', user.email)
             cache.set('first_name', user.first_name)
             cache.set('last_name', user.last_name)
-            
-            a=int(user.username)
 
-            if a<1000:
+            try:
+                a = int(user.username)
+            except ValueError:
+                a = None
+
+
+            if (a!=None and a<1000):
                 return render(request, 'epresence_api/prof.html')
-            else:
+            elif (a!=None):
                 return render(request, 'epresence_api/student.html')
+            else: 
+                return redirect('/admin/')
             
         else:
             return render(request, 'epresence_api/login.html')
