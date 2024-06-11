@@ -1,29 +1,44 @@
-// frontend/src/App.js file
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Conseils from './components/Conseils';
+import ResetPassword from './components/ResetPassword';
+import ChangePassword from './components/ChangePassword';
+import Dashboard from './components/Dashboard';
+import StudentsTable from './components/StudentsTable';
+import AbsencesTable from './components/AbsencesTable';
+import ResultatTable from './components/ResultatTable';
+import './assets/styles/App.css';
+import AccueilEtudiant from "./components/accueil-e";
+import Grades from "./components/grades";
+import Absences from "./components/absences";
 
-import React, { Component } from "react";
-import { BrowserRouter, Route, Routes, useRoutes } from "react-router-dom";
-import HelloWorld from "./components/test/test";
-import Login from "./components/login/Login";
-import Error404 from "./components/errors/Error404";
-import './App.css';
 
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Home />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/accueil-etu" element={<AccueilEtudiant />} />
+          <Route path="/grades" element={<Grades />} />
+          <Route path="/absence-etu" element={<Absences />} />
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Login />} />
-            <Route path="/hello" element={<HelloWorld />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </BrowserRouter>
+        </Routes>
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
-export default App;
+const Home = () => {
+  return (
+    <div className="home-container">
+      <Conseils />
+      <Login />
+    </div>
+  );
+};
 
+export default App;
