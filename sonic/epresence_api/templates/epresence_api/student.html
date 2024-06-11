@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Link to the external stylesheet using Django's static template tag -->
-    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil-e.css' %}">
     {% block styles %}
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil-e.css' %}">
+    {% endblock %}
     
     <title>Login Page</title>
 </head>
