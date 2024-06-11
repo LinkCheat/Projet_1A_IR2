@@ -1,16 +1,24 @@
+body {
+  background-color: #333; /* dark gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full viewport height */
+  margin: 0;
+}
+
 .login-container {
-  background-color: #555; /* gris moyen */
+  background-color: #555; /* medium gray */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 400px;
-  margin: 0 auto;
 }
 
 .login-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #fff; /* Couleur du texte blanc */
+  color: #fff; /* white text color */
 }
 
 .form-group {
@@ -20,23 +28,23 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #ddd; /* Couleur du texte gris clair */
+  color: #ddd; /* light gray text color */
 }
 
 .form-group input {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  border: 1px solid #777; /* gris foncé pour la bordure */
+  border: 1px solid #777; /* dark gray border */
   border-radius: 4px;
-  background-color: #444; /* gris foncé pour le fond */
-  color: #fff; /* blanc pour le texte */
+  background-color: #444; /* dark gray background */
+  color: #fff; /* white text color */
 }
 
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: #28a745; /* vert écologique */
+  background-color: #28a745; /* ecological green */
   color: white;
   border: none;
   border-radius: 5px;
@@ -51,7 +59,7 @@
 .forgot-password-button {
   width: 100%;
   padding: 10px;
-  background-color: #6c757d; /* gris pour le bouton */
+  background-color: #6c757d; /* gray button */
   color: white;
   border: none;
   border-radius: 5px;

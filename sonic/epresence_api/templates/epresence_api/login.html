@@ -1,31 +1,28 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel = "stylesheet" href =  "{% static 'styles/Login.css' %}"/>
-        <title>Login Page</title>
-    </head>
-    <body>
-        <section>
-            <div id="erreur2">
-                <h2>Connecte-toi</h2>
-                    <form action='login' method="post">
-                        {% csrf_token %}
-                    <p>
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="mon-pseudo" required/>
-                    </p>
-                    <p>
-                        <label for="password">MOT DE PASSE</label>
-                        <input class="erreur" type="password" name="password" id="mon-mdp"/>
-                    </p>
-                    <p>
-                        <input type="submit" name="envoi" value="Valider" onclick="clignoter(),clignoterdiv()" />
-                    </p>
-                </form>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/Login.css' %}"/>
+    <title>Login Page</title>
+</head>
+<body>
+    <section class="login-container">
+        <h2>Connecte-toi</h2>
+        <form action='login' method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="mon-pseudo" required/>
             </div>
-        </section>
-    </body>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input class="erreur" type="password" name="password" id="mon-mdp"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="envoi" value="Valider" class="login-button" onclick="clignoter(),clignoterdiv()" />
+            </div>
+        </form>
+    </section>
+</body>
 </html>
-
