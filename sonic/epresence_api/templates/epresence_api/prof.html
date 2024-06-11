@@ -17,10 +17,10 @@
         <h1 class="mb-4 page-title">Mon Espace Professeur</h1>
         <div class="button-row">
             <!-- Links to different pages using Django's URL template tag -->
-            <a href="{% url 'epresence_api:professeur' %}" class="btn btn-primary">Mon profil</a>
+            <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Mon profil</a>
             <a href="{% url 'epresence_api:absences_perso' %}" class="btn btn-primary">Mes absences</a>
-            <a href="{% url 'epresence_api:notes_prof' %}" class="btn btn-primary">Mon notes</a>  
             <a href="{% url 'epresence_api:emploi_prof' %}" class="btn btn-primary">Mon emplois du temps</a>
+            <a href="{% url 'epresence_api:notes_prof' %}" class="btn btn-primary">Notes étudiants</a>  
             <a href="{% url 'epresence_api:absences_cours' %}" class="btn btn-primary">Absences étudiants</a>  
         </div>
   </div>

@@ -11,15 +11,17 @@ urlpatterns = [
     path('login',views.Login),
     path('logout',views.LogoutView, name='logout'),
 
+    path('home/', views.HomeView, name='home'),
+
     path('Mes_absences/', views.Absences, name='absences_perso'),
     
-    path('professeur/', views.ProfView, name='professeur'),
+    path('Espace_professeur/', views.ProfView, name='professeur'),
     path('Mes_cours/', views.emploi_du_temps_prof, name='emploi_prof'),
     path('notes_prof/', views.Notes_prof, name='notes_prof'),
     path('Absences_élèves/', views.Absences_cours, name='absences_cours'),
     
     
-    path('etudiant/', views.StudentView, name='etudiant'),
+    path('Espace_etudiant/', views.StudentView, name='etudiant'),
     path('Emplois_du_temps/', views.emploi_du_temps_eleve, name='emploi_eleve'),
     path('notes_eleve/', views.Notes_eleve, name='notes_eleve'),
     
