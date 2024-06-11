@@ -166,6 +166,7 @@ def Absences(request):
 
 def emploi_du_temps_eleve(request):
     csv = get_csv_cache('emploi_du_temps_eleve')
+    csv_download_applicate('emploi_du_temps_eleve')
     id = cache.get('id')
     user = User.objects.get(username=id)
     eleve = Eleve.objects.get(id_student=user.id)
@@ -175,6 +176,7 @@ def emploi_du_temps_eleve(request):
         data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_eleve')
+        csv_download_applicate('emploi_du_temps_eleve')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         
