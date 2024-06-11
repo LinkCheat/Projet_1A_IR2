@@ -8,6 +8,9 @@ import csv
 import io
 from django.http import HttpResponse
 
+from django.db.models import Q
+
+
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
 def csv_cache(name, titre_csv, data):
@@ -67,13 +70,15 @@ def resetPasswordView(request):
     
 # API pour la page du login
 def Login(request):
+
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
         user = User.objects.get(email=email)
         auth = authenticate(request, username=user.username, password=password)
-        print(auth)
+
         if auth is not None:
+
             if(cache.get('id')!=user.username):
                 cache.clear()
             login(request, user)
@@ -82,17 +87,16 @@ def Login(request):
             cache.set('first_name', user.first_name)
             cache.set('last_name', user.last_name)
             
-            data = User.objects.all().values_list('username','first_name','last_name','email')
-            csv_cache('test',['id','first_name','last_name','email'],data)
-            csv_download_applicate('test')
             a=int(user.username)
-            print(a)
+
             if a<1000:
                 return render(request, 'epresence_api/prof.html')
             else:
                 return render(request, 'epresence_api/student.html')
+            
         else:
             return render(request, 'epresence_api/login.html')
+        
     else:
         return render(request, 'epresence_api/login.html')
 
@@ -131,6 +135,8 @@ def download_csv(request):
     return response
 
 
+
+
 #csv
 
 #Note de l'eleve
@@ -158,5 +164,17 @@ def Absences(request):
         csv = get_csv_cache('Absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
+def emploi_du_temps_eleve(request):
+    csv = get_csv_cache('emploi_du_temps_eleve')
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    eleve = Eleve.objects.get(id_student=user.id)
+    if csv == None:
+        data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        data = data.filter(Q(id_group=eleve.Classe) | Q(id_group=eleve.TD) | Q(id_group=eleve.TP))
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        csv = get_csv_cache('emploi_du_temps_eleve')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         
