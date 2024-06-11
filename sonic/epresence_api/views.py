@@ -151,16 +151,31 @@ def download_csv(request):
 
 #Note de l'eleve
 def Notes_eleve(request):
-    csv = get_csv_cache('notes')
+    csv = get_csv_cache('notes_eleve')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Note.objects.all().values_list('id_student','note','id_matiere')
         data = data.filter(id_student = user)
         data = data.values_list('id_matiere','note')
-        csv_cache('notes',['matiere','note'],data)
-        csv = get_csv_cache('notes')
-    csv_download_applicate('notes')
+        csv_cache('notes_eleve',['matiere','note'],data)
+        csv = get_csv_cache('notes_eleve')
+    csv_download_applicate('notes_eleve')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+
+def Notes_prof(request):
+    csv = get_csv_cache('notes_prof')
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    matiere = Matiere.objects.filter(id_professor=user.id)
+    if csv == None:
+        data = Note.objects.all().values_list('id_student','note','id_matiere')
+        matiere_ids = matiere.values_list('id_matiere', flat=True)
+        data = data.filter(id_matiere__in=matiere_ids)
+        data = data.values_list('id_student','note','id_matiere')
+        csv_cache('notes_prof',['etudiant','note','matiere'],data)
+        csv = get_csv_cache('notes_prof')
+    csv_download_applicate('notes_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def Absences(request):
