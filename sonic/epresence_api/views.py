@@ -67,13 +67,15 @@ def resetPasswordView(request):
     
 # API pour la page du login
 def Login(request):
+
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
         user = User.objects.get(email=email)
         auth = authenticate(request, username=user.username, password=password)
-        print(auth)
+
         if auth is not None:
+
             if(cache.get('id')!=user.username):
                 cache.clear()
             login(request, user)
@@ -82,17 +84,16 @@ def Login(request):
             cache.set('first_name', user.first_name)
             cache.set('last_name', user.last_name)
             
-            data = User.objects.all().values_list('username','first_name','last_name','email')
-            csv_cache('test',['id','first_name','last_name','email'],data)
-            csv_download_applicate('test')
             a=int(user.username)
-            print(a)
+
             if a<1000:
                 return render(request, 'epresence_api/prof.html')
             else:
                 return render(request, 'epresence_api/student.html')
+            
         else:
             return render(request, 'epresence_api/login.html')
+        
     else:
         return render(request, 'epresence_api/login.html')
 
