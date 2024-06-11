@@ -153,15 +153,17 @@ def Notes_eleve(request):
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def Absences(request):
-    csv = get_csv_cache('Absences')
+    csv = get_csv_cache('absences')
+    csv_download_applicate('absences')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Absence.objects.all().values_list('id_student','motif','seance')
         data = data.filter(id_student = user)
         data = data.values_list('seance','motif')
-        csv_cache('Absences',['seance numéro','motif'],data)
-        csv = get_csv_cache('Absences')
+        csv_cache('absences',['seance numéro','motif'],data)
+        csv = get_csv_cache('absences')
+        csv_download_applicate('absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def emploi_du_temps_eleve(request):
