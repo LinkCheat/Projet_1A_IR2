@@ -8,6 +8,9 @@ import csv
 import io
 from django.http import HttpResponse
 
+from django.db.models import Q
+
+
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
 def csv_cache(name, titre_csv, data):
@@ -132,6 +135,8 @@ def download_csv(request):
     return response
 
 
+
+
 #csv
 
 #Note de l'eleve
@@ -148,16 +153,32 @@ def Notes_eleve(request):
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def Absences(request):
-    csv = get_csv_cache('Absences')
+    csv = get_csv_cache('absences')
+    csv_download_applicate('absences')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Absence.objects.all().values_list('id_student','motif','seance')
         data = data.filter(id_student = user)
         data = data.values_list('seance','motif')
-        csv_cache('Absences',['seance numéro','motif'],data)
-        csv = get_csv_cache('Absences')
+        csv_cache('absences',['seance numéro','motif'],data)
+        csv = get_csv_cache('absences')
+        csv_download_applicate('absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
+def emploi_du_temps_eleve(request):
+    csv = get_csv_cache('emploi_du_temps_eleve')
+    csv_download_applicate('emploi_du_temps_eleve')
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    eleve = Eleve.objects.get(id_student=user.id)
+    if csv == None:
+        data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        data = data.filter(Q(id_group=eleve.Classe) | Q(id_group=eleve.TD) | Q(id_group=eleve.TP))
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        csv = get_csv_cache('emploi_du_temps_eleve')
+        csv_download_applicate('emploi_du_temps_eleve')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         

@@ -4,23 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the external stylesheet using Django's static template tag -->
     {% block styles %}
-    <link rel = "stylesheet" href =  "{% static 'epresence_api/styles/accueil-e.css' %}"/>
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil-e.css' %}">
     {% endblock %}
+    
     <title>Login Page</title>
 </head>
-<div className="container mt-5 d-flex flex-column align-items-center">
-    <h1 className="mb-4 page-title">Mon Espace Étudiant</h1>
-    <div className="row justify-content-end mb-3">
-            <h5 className="card-title">Notes</h5>
-            <a href="{% url 'epresence_api:notes' %}">Mes notes</a>
-    </div>
-    <div className="row justify-content-end mb-3">
-            <h5 className="card-title">Profil</h5>
-            <Link to="/profile" className="btn btn-primary">Mon profil</Link>
-    </div>
-    <div className="row justify-content-end">
-            <h5 className="card-title">Absences</h5>
-            <a href="{% url 'epresence_api:absences' %}">Mes absences</a>
-    </div>
+<body>
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <!-- Page title -->
+        <h1 class="mb-4 page-title">Mon Espace Étudiant</h1>
+        <div class="button-row">
+            <!-- Links to different pages using Django's URL template tag -->
+            <a href="{% url 'epresence_api:notes' %}" class="btn btn-primary">Mes notes</a>
+            <a href="{% url 'epresence_api:etudiant' %}" class="btn btn-primary">Mon profil</a>
+            <a href="{% url 'epresence_api:absences' %}" class="btn btn-primary">Mes absences</a>
+            <a href="{% url 'epresence_api:emploi_eleve' %}" class="btn btn-primary">Mon emplois du temps</a>    
+        </div>
   </div>
+</body>
+</html>
