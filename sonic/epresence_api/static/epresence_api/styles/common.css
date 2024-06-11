@@ -1,0 +1,45 @@
+body {
+    background-color: #333; /* dark gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* full viewport height */
+    margin: 0;
+    color: #fff; /* white text color */
+  }
+  
+  .container {
+    background-color: #555; /* medium gray */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* wide enough for table */
+    max-width: 1000px; /* limit max width */
+    overflow-x: auto; /* handle overflow */
+  }
+  
+  h4 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: #fff; /* white text color for table cells */
+  }
+  
+  th {
+    background-color: #666; /* slightly darker gray */
+  }
+  
+  thead {
+    background-color: #777; /* medium gray */
+  }
+  

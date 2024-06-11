@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -86,19 +86,29 @@ def Login(request):
             cache.set('email', user.email)
             cache.set('first_name', user.first_name)
             cache.set('last_name', user.last_name)
-            
-            a=int(user.username)
 
-            if a<1000:
+            try:
+                a = int(user.username)
+            except ValueError:
+                a = None
+
+
+            if (a!=None and a<1000):
                 return render(request, 'epresence_api/prof.html')
-            else:
+            elif (a!=None):
                 return render(request, 'epresence_api/student.html')
+            else: 
+                return redirect('/admin/')
             
         else:
             return render(request, 'epresence_api/login.html')
         
     else:
         return render(request, 'epresence_api/login.html')
+    
+def LogoutView(request):
+    cache.clear()
+    return redirect('/')
 
 def empty_verify_view(request):
     return render(request, 'verify.html')
@@ -141,27 +151,29 @@ def download_csv(request):
 
 #Note de l'eleve
 def Notes_eleve(request):
-    csv = get_csv_cache('Notes')
+    csv = get_csv_cache('notes')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Note.objects.all().values_list('id_student','note','id_matiere')
         data = data.filter(id_student = user)
         data = data.values_list('id_matiere','note')
-        csv_cache('Notes',['matiere','note'],data)
-        csv = get_csv_cache('Notes')
+        csv_cache('notes',['matiere','note'],data)
+        csv = get_csv_cache('notes')
+    csv_download_applicate('notes')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def Absences(request):
-    csv = get_csv_cache('Absences')
+    csv = get_csv_cache('absences')
     id = cache.get('id')
     user = User.objects.get(username=id)
     if csv == None:
         data = Absence.objects.all().values_list('id_student','motif','seance')
         data = data.filter(id_student = user)
         data = data.values_list('seance','motif')
-        csv_cache('Absences',['seance numéro','motif'],data)
-        csv = get_csv_cache('Absences')
+        csv_cache('absences',['seance numéro','motif'],data)
+        csv = get_csv_cache('absences')
+    csv_download_applicate('absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
 
 def emploi_du_temps_eleve(request):
@@ -175,6 +187,21 @@ def emploi_du_temps_eleve(request):
         data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_eleve')
+    csv_download_applicate('emploi_du_temps_eleve')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+
+def emploi_du_temps_prof(request):
+    csv = get_csv_cache('emploi_du_temps_prof')
+    id = cache.get('id')
+    user = User.objects.get(username=id)
+    matiere = Matiere.objects.get().filter(professeur=user.id)
+    if csv == None:
+        data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        data = data.filter(id_matiere = matiere)
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
+        csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        csv = get_csv_cache('emploi_du_temps_prof')
+    csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
         

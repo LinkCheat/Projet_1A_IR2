@@ -9,8 +9,11 @@ urlpatterns = [
     
     path('',views.LoginView, name='loginview'),
     path('login',views.Login),
+    path('logout',views.LogoutView, name='logout'),
     
     path('professeur/', views.ProfView, name='professeur'),
+    path('Mes_cours/', views.emploi_du_temps_prof, name='emploi_prof'),
+
     
     
     path('etudiant/', views.StudentView, name='etudiant'),
@@ -19,8 +22,8 @@ urlpatterns = [
     path('absences/', views.Absences, name='absences'),
     
     
-    path('password/', views.ChangePasswordView),
-    path('resetpassword/', views.resetPasswordView),
+    path('password/', views.ChangePasswordView, name='change_password'),
+    path('resetpassword/', views.resetPasswordView, name='reset_password'),
     
     
     path('verify/', views.empty_verify_view, name='empty-verify-view'),  # Assurez-vous d'avoir cette ligne
