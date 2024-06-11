@@ -2,14 +2,6 @@
 *.env
 *.pyc
 
-*/package-lock.json
-
-*/nodemodule
-*/build
-
 /sonic/staticfiles
 
-*/Usersyouronpm-cache/
-
-
-sonic/epresence_api/migrations/*
+/sonic/epresence_api/migrations/*

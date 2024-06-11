@@ -9,20 +9,16 @@
 </head>
 <div>
     <header>
-      <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <select id="year-select">
-        <option>2023/2024</option>
-        <option>2022/2023</option>
-      </select>
       <div id="user-info">
         <span>E-PRESENCE</span>
         <span>USER</span>
       </div>
     </header>
-    <div class="sidebar" id="sidebar">
-      <a href="#" onclick="changeContent('evaluation')">Évaluation</a>
-      <a href="#" onclick="changeContent('absences')">Absences</a>
-      <a href="#" onclick="changeContent('parametres')">Paramètres</a>
+    <div>
+      <ul>
+      <a href="http://0.0.0.0:8000/api/evaluation">Évaluation</a>
+      <a href="http://0.0.0.0:8000/api/Absence">Absences</a>
+      </ul>
     </div>
     <div class="main-content" id="main-content" style="margin-left: 0;">
       <h2>{content.title}</h2>

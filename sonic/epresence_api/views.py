@@ -9,11 +9,11 @@ import io
 from django.http import HttpResponse
 
 def simulationlog(request):
-    cache.set('id','22304412')
-    cache.set('email', 'zyad.oumaloul@uha.fr')
-    cache.set('first_name', 'ZYAD')
-    cache.set('last_name', 'OUMALOUL')
-    return render(request, 'epresence_api/student.html')
+    cache.set('id','1')
+    cache.set('email', 'joel.dion@uha.fr')
+    cache.set('first_name', 'Joel')
+    cache.set('last_name', 'DION')
+    return render(request, 'epresence_api/prof.html')
     
 
     
@@ -78,9 +78,9 @@ def Login(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        print(email)
         user = User.objects.get(email=email)
         auth = authenticate(request, username=user.username, password=password)
+        print(auth)
         if auth is not None:
             if(cache.get('id')!=user.username):
                 cache.clear()
@@ -93,15 +93,14 @@ def Login(request):
             data = User.objects.all().values_list('username','first_name','last_name','email')
             csv_cache('test',['id','first_name','last_name','email'],data)
             csv_download_applicate('test')
-            
-            if user.username<1000:
+            a=user.username
+            print(a)
+            if a<1000:
                 return render(request, 'epresence_api/prof.html')
             else:
                 return render(request, 'epresence_api/student.html')
         else:
             return render(request, 'epresence_api/login.html')
-    else:
-        return render(request, 'epresence_api/login.html')
 
 def empty_verify_view(request):
     return render(request, 'verify.html')
@@ -142,33 +141,28 @@ def download_csv(request):
 
 #Note de l'eleve
 def Notes_eleve(request):
-    data = Note.objects.all().values_list('id_student','note','id_matiere')
-    id = cache.get('id')
-    user = User.objects.get(username=id)
-    data = data.filter(id_student = user)
-    data = data.values_list('id_matiere','note')
-    csv_cache('Notes',['matiere','note'],data)
     csv = get_csv_cache('Notes')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
-
-def Absence_eleve(request):
-    data = Absence.objects.all().values_list('id_student','motif','seance')
     id = cache.get('id')
     user = User.objects.get(username=id)
-    data = data.filter(id_student = user)
-    data = data.values_list('seance','motif')
-    csv_cache('Absences',['seance numéro','motif'],data)
+    if csv == None:
+        data = Note.objects.all().values_list('id_student','note','id_matiere')
+        data = data.filter(id_student = user)
+        data = data.values_list('id_matiere','note')
+        csv_cache('Notes',['matiere','note'],data)
+        csv = get_csv_cache('Notes')
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+
+def Absences(request):
     csv = get_csv_cache('Absences')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
-
-def Seance_eleve(request):
-    seance = Seance.objects.all().values_list('id_matiere','id_group','date','heure_debut','heure_fin','salle','type_cours').order_by('date').order_by('heure_debut')
     id = cache.get('id')
     user = User.objects.get(username=id)
-    group = Eleve.objects.all()
-    group = group.filter(id_student=user)
-    seance = seance.filter(id_group=group)
-    seance = seance.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
-    csv_cache('Seances',['matiere','date','heure_debut','heure_fin','salle','type_cours'],seance)
-    csv = get_csv_cache('Seances')
+    if csv == None:
+        data = Absence.objects.all().values_list('id_student','motif','seance')
+        data = data.filter(id_student = user)
+        data = data.values_list('seance','motif')
+        csv_cache('Absences',['seance numéro','motif'],data)
+        csv = get_csv_cache('Absences')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+
+        
+        

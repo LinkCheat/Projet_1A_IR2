@@ -5,16 +5,17 @@ from .views import *
 
 app_name = "epresence_api"
 urlpatterns = [
-    path('login/',views.LoginView),
-    path('auth/',views.Login),
+    
+    
+    path('',views.LoginView),
+    path('login',views.Login),
     
     path('prof/', views.ProfView),
     
     
     path('student/', views.StudentView),
     path('Note_student/', views.Notes_eleve),
-    path('Absence_student/', views.Absence_eleve),
-    path('Seance_student/', views.Seance_eleve),
+    path('Absence/', views.Absences),
     
     
     path('password/', views.ChangePasswordView),
