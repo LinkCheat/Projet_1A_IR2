@@ -1,11 +1,29 @@
 from django.urls import path
 from . import views
+from .views import *
+
 
 app_name = "epresence_api"
 urlpatterns = [
-    path('hello-world/', views.hello_world, name='hello_world'),
-    path('login/', views.LoginView.as_view(), name='api-login'),
-    path('reset-pass/', views.send_verif_email.as_view(), name='api-resetpass'),
+    path('login/',views.LoginView),
+    path('auth/',views.Login),
+    
+    path('prof/', views.ProfView),
+    
+    
+    path('student/', views.StudentView),
+    path('Note_student/', views.Notes_eleve),
+    path('Absence_student/', views.Absence_eleve),
+    path('Seance_student/', views.Seance_eleve),
+    
+    
+    path('password/', views.ChangePasswordView),
+    path('resetpassword/', views.resetPasswordView),
+    
+    
     path('verify/', views.empty_verify_view, name='empty-verify-view'),  # Assurez-vous d'avoir cette ligne
-    path('change-pass/<str:token>/',views.ChangePassword.as_view(), name='change-pass'),
+    
+    
+    path('del/', views.delsession),
+    path('download/csv/', download_csv, name='download_csv'),
 ]

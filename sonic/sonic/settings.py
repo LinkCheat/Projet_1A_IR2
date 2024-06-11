@@ -170,3 +170,12 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost','http://localhost:3000','http://0.0.0
 CSRF_COOKIE_DOMAIN = "localhost"
 
 SESSION_COOKIE_DOMAIN = "localhost" 
+
+CACHES = {
+    "default": {
+        "BACKEND":"django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION":"var/tmp/django_cache",
+        "TIMEOUT" : None,
+        "OPTION": {"MAX_ENTRIES":10000},
+    }  
+}

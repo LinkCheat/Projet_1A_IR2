@@ -13,17 +13,6 @@ services:
       - '3306:3306'                       
     volumes:
       - database:/var/lib/mysql
-  frontend:
-    build: 
-      context : ./epresence_frontend
-      dockerfile: dockerfile
-    container_name: Sonic_frontend
-    command: sh -c "npm start"
-    restart: always  
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
   backend:
     build: 
       context: ./sonic
