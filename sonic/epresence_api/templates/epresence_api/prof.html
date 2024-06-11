@@ -17,10 +17,34 @@
         <h1 class="mb-4 page-title">Mon Espace Professeur</h1>
         <div class="button-row">
             <!-- Links to different pages using Django's URL template tag -->
-            <a href="{% url 'epresence_api:etudiant' %}" class="btn btn-primary">Mon profil</a>
+            <a href="{% url 'epresence_api:professeur' %}" class="btn btn-primary">Mon profil</a>
             <a href="{% url 'epresence_api:absences' %}" class="btn btn-primary">Mes absences</a>
+            <a href="{% url 'epresence_api:notes_prof' %}" class="btn btn-primary">Mon notes</a>  
             <a href="{% url 'epresence_api:emploi_prof' %}" class="btn btn-primary">Mon emplois du temps</a>    
         </div>
   </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- User logo -->
+    <div class="user-logo">
+        <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="User Logo">
+    </div>
+    <!-- App name -->
+    <div class="app-name">
+        <h2>Mon Espace Professeur</h2>
+    </div>
+    <!-- Student name -->
+    <div class="student-name">
+        <h3>Num. : {{ user.username }}</h3>
+        <h3> {{ user.first_name }}</h3>
+        <h3> {{ user.last_name }}</h3>
+        
+    </div>
+    <!-- Logout link -->
+    <div class="logout">
+        <a href="/" class="btn btn-danger">Déconnexion</a>
+    </div>
+</div>
 </body>
 </html>

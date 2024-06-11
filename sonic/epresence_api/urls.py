@@ -13,7 +13,7 @@ urlpatterns = [
     
     path('professeur/', views.ProfView, name='professeur'),
     path('Mes_cours/', views.emploi_du_temps_prof, name='emploi_prof'),
-
+    path('notes_prof/', views.Notes_prof, name='notes_prof'),
     
     
     path('etudiant/', views.StudentView, name='etudiant'),
