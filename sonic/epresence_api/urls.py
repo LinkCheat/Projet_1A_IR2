@@ -20,7 +20,7 @@ urlpatterns = [
     
     
     path('password/', views.ChangePasswordView, name='change_password'),
-    path('resetpassword/', views.resetPasswordView),
+    path('resetpassword/', views.resetPasswordView, name='reset_password'),
     
     
     path('verify/', views.empty_verify_view, name='empty-verify-view'),  # Assurez-vous d'avoir cette ligne
