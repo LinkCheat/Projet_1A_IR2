@@ -2,6 +2,9 @@ from django.core.management.base import BaseCommand
 from epresence_api.models import Student
 import csv, os
 
+# à revoir !!!!
+
+
 class Command(BaseCommand):
     help = 'Import student data from a CSV file'
 
