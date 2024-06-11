@@ -7,7 +7,7 @@ app_name = "epresence_api"
 urlpatterns = [
     
     
-    path('',views.LoginView),
+    path('',views.LoginView, name='loginview'),
     path('login',views.Login),
     
     path('professeur/', views.ProfView, name='professeur'),
