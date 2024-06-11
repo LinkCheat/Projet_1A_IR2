@@ -194,10 +194,11 @@ def emploi_du_temps_prof(request):
     csv = get_csv_cache('emploi_du_temps_prof')
     id = cache.get('id')
     user = User.objects.get(username=id)
-    matiere = Matiere.objects.get().filter(professeur=user.id)
+    matiere = Matiere.objects.filter(id_professor=user.id)
     if csv == None:
         data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
-        data = data.filter(id_matiere = matiere)
+        matiere_ids = matiere.values_list('id_matiere', flat=True)
+        data = data.filter(id_matiere__in=matiere_ids)
         data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_prof')
