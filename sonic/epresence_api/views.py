@@ -5,6 +5,7 @@ from django.contrib import messages
 from epresence_api.models import *
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
 import csv
 import io
 from django.http import HttpResponse
@@ -418,4 +419,74 @@ def emploi_du_temps_prof(request):
 
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
+
+
+#statistic
+
+def stat_moyenne_par_matiere_prof(request):
+    id=cache.get('id')
+    c = Matiere.objects.all().filter(id_professor=id).values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
+    d = Note.objects.all().values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
+    matiere = [item for item in c]
+    note = [item for item in d]
+    data2=[]
+    
+    for i in note:
+        for y in matiere:
+            if y[0] == i[1]:
+                data2.append([y[1],i[2],i[3]])
+                
+                
+                
+    data3=[]           
+    for i in data2:
+        s=i
+        p=1
+        for y in data2:
+            if y !=i and y[2] == s[2]:
+                s[1]=s[1]+y[1]
+                p=p+1
+        s[1]=s[1]/p
+        data3.append(s)
+    labels = []
+    data = []
+    for i in data3:
+        labels = labels+[i[0]]
+        data = data+[i[1]]
+            
+    context = {
+        'nom_graphique': 'Moyenne par matiere',  
+        'labels': labels,
+        'data': data
+    }
+    return render(request, 'epresence_api/graphe.html',{'data_from_django':context})
+
+def stat_note_par_matiere_eleve(request):
+    id=cache.get('id')
+    c = Matiere.objects.all().values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
+    d = Note.objects.all().filter(id_student=id).values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
+    matiere = [item for item in c]
+    note = [item for item in d]
+    data2=[]
+
+    for i in note:
+        for y in matiere:
+            if y[0] == i[1]:
+                data2.append([y[1],i[2],i[3]])
+            else:
+                data2.append([y[1],0,i[3]])
+    
+    labels = []
+    data = []
+    for i in data2:
+        labels = labels+[i[2]]
+        data = data+[i[1]]
+            
+    context = {
+            
+        'nom_graphique': 'Note par matiere',
+        'labels': labels,
+        'data': data
+    }
+    return render(request, 'epresence_api/graphe.html',{'data_from_django':context})
         
