@@ -467,7 +467,6 @@ def choisir_matiere(request):
 
 # La saisie des notes
 from django.core.paginator import Paginator
-
 def eleves_liste(request):
     csv = get_csv_cache('eleves')
     id = cache.get('id')
@@ -476,7 +475,6 @@ def eleves_liste(request):
     user = User.objects.get(username=id)
     
     if csv is None:
-        s_matiere = cache.get('selected_matiere')
         s_groupe = cache.get('selected_group')
 
         # Récupérer les élèves dans le groupe sélectionné
@@ -497,7 +495,68 @@ def eleves_liste(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'epresence_api/saisir_note.html', {'first_name': user.first_name, 'last_name': user.last_name, 'page_obj': page_obj})
+    # Conserver les données saisies
+    if request.method == 'POST':
+        notes_data = request.POST.dict()
+        request.session['notes_data'] = notes_data
 
+    # Récupérer les données saisies de la session
+    notes_data = request.session.get('notes_data', {})
+
+    return render(request, 'epresence_api/saisir_note.html', {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'page_obj': page_obj,
+        'notes_data': notes_data
+    })
+
+# soumettre les notes
+
+def soumettre_notes(request):
+    if request.method == 'POST':
+        id = cache.get('id')
+        if id is None:
+            return redirect('/login/')
+        user = User.objects.get(username=id)
+        
+        s_matiere = cache.get('selected_matiere')
+        s_groupe = cache.get('selected_group')
+        
+        eleves = GroupTPTD.objects.filter(nom_group=s_groupe).values_list('id', flat=True)
+        
+        for eleve_id in eleves:
+            note = request.POST.get(f'note_{eleve_id}')
+            if note:
+                # Sauvegarder la note dans la base de données
+                Note.objects.create(id_student=eleve_id, id_matiere=s_matiere, note=note)
+
+        return redirect('eleves_liste')
+
+    return redirect('/Espace_professeur/')
+
+
+# La saisie des absences
+
+def soumettre_abs(request):
+    if request.method == 'POST':
+        id = cache.get('id')
+        if id is None:
+            return redirect('/login/')
+        user = User.objects.get(username=id)
+        
+        s_matiere = cache.get('selected_matiere')
+        s_groupe = cache.get('selected_group')
+        
+        eleves = GroupTPTD.objects.filter(nom_group=s_groupe).values_list('id', flat=True)
+        
+        for eleve_id in eleves:
+            note = request.POST.get(f'note_{eleve_id}')
+            if note:
+                # Sauvegarder la note dans la base de données
+                Note.objects.create(id_student=eleve_id, id_matiere=s_matiere, note=note)
+
+        return redirect('eleves_liste')
+
+    return redirect('/Espace_professeur/')
 
 

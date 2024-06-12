@@ -29,6 +29,7 @@ urlpatterns = [
     path('choisir_matiere/', views.choisir_matiere, name='choisir_matiere'),
 
     path('saisir_note/', views.eleves_liste, name='saisir_note'),
+    path('soumettre_notes/', views.soumettre_notes, name='soumettre_notes'),
     
     path('reset_password/',views.ChangePassword, name='reset_password'),
         
