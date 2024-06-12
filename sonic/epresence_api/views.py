@@ -58,7 +58,8 @@ def LoginView(request):
     return render(request, 'epresence_api/login.html')
 
 def ProfView(request):
-    return render(request, 'epresence_api/prof.html')
+    user = User.objects.get(username=id)
+    return render(request, 'epresence_api/prof.html',{'user':user})
 
 def StudentView(request):
     return render(request, 'epresence_api/student.html')
@@ -175,7 +176,28 @@ def download_csv(request):
 
 #csv creation
 
-#Note de l'eleve
+def mon_profil(request):
+    user = request.user
+    profile = StudentProfile.objects.get(user=user)  # Adjust based on your actual profile model
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important for keeping the user logged in
+            messages.success(request, 'Votre mot de passe a été changé avec succès!')
+            return redirect('mon_profil')
+        else:
+            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+    else:
+        form = PasswordChangeForm(user)
+
+    return render(request, 'epresence_api/mon_profil.html', {
+        'user': user,
+        'profile': profile,
+        'form': form
+    })
+
 def Notes_eleve(request):
     csv = get_csv_cache('notes_eleve')
     id = cache.get('id')
