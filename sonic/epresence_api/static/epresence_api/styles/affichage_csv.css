@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     gap: 20px; /* Espacement entre les boutons */
+    margin-left: 20px;
+    margin-right: 20px;
 }
   
 .btn-primary {
@@ -17,4 +19,20 @@
   
 .btn-primary:hover {
     background-color: #61b390; /* Vert foncé */
+}
+
+.logout .btn {
+    width: 100%;
+    background-color: #dc3545; /* Rouge */
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+  
+.logout .btn:hover {
+    background-color: #c82333; /* Rouge foncé */
 }

@@ -7,8 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Link to the external stylesheet using Django's static template tag -->
     {% block styles %}
-    <link rel="stylesheet" href="{% static 'epresence_api/styles/acceuilprof.css' %}"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil.css' %}">
     {% endblock %}
     <title>e-Presence</title>
 </head>
@@ -33,23 +32,17 @@
             <p>{{ user.username }} {{ user.first_name }} {{ user.last_name }}</p>
         </div>
     </div>
-    <div class="main-content" id="main-content">
-        <h2>mon Espace E-presence</h2>
-        <h2>{{ content.title }}</h2>
-        <p>{{ content.detail }}</p>
+    <!-- Student name -->
+    <div class="student-name">
+        <h3>Num. : {{ username }}</h3>
+        <h3> {{ first_name }}</h3>
+        <h3> {{ last_name }}</h3>
+        
     </div>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
-            if (sidebar.classList.contains('expanded')) {
-                sidebar.classList.remove('expanded');
-                mainContent.classList.remove('shifted');
-            } else {
-                sidebar.classList.add('expanded');
-                mainContent.classList.add('shifted');
-            }
-        }
-    </script>
+    <!-- Logout link -->
+    <div class="logout">
+        <a href="{% url 'epresence_api:logout' %}" class="btn btn-danger">Déconnexion</a>
+    </div>
+</div>
 </body>
 </html>

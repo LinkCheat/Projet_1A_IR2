@@ -58,11 +58,37 @@ def LoginView(request):
     return render(request, 'epresence_api/login.html')
 
 def ProfView(request):
+
+    id = cache.get('id')
+
+    if id == None:
+        return redirect('/login')
+    
     user = User.objects.get(username=id)
-    return render(request, 'epresence_api/prof.html',{'user':user})
+
+    cache.set('id',user.username)
+    cache.set('email', user.email)
+    cache.set('first_name', user.first_name)
+    cache.set('last_name', user.last_name)
+
+
+    return render(request, 'epresence_api/prof.html', {'username':user.username,'first_name':user.first_name,'last_name':user.last_name})
 
 def StudentView(request):
-    return render(request, 'epresence_api/student.html')
+
+    id = cache.get('id')
+
+    if id == None:
+        return redirect('/login')
+    
+    user = User.objects.get(username=id)
+
+    cache.set('id',user.username)
+    cache.set('email', user.email)
+    cache.set('first_name', user.first_name)
+    cache.set('last_name', user.last_name)
+
+    return render(request, 'epresence_api/student.html', {'username':user.username,'first_name':user.first_name,'last_name':user.last_name})
 
 def ChangePasswordView(request):
     return render(request, 'epresence_api/Password.html')
