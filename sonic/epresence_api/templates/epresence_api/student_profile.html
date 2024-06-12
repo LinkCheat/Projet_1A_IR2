@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/student_profile.css' %}"/>
+    
+    <title>Profil de l'étudiant</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Informations Personnelles</h1>
+        <p>Prénom : {{ first_name }}</p>
+        <p>Nom : {{ last_name }}</p>
+        <p>Email : {{ email }}</p>
+        <p>Numéro étudiant : {{ username }}</p>
+
+        <div class="button-row">
+            <a href="{% url 'epresence_api:home' %}" class="btn-primary">Modifier mon mot de passe</a>
+            <a href="{% url 'epresence_api:home' %}" class="btn-primary">Retour</a>
+            <a href="{% url 'epresence_api:logout' %}" class="btn-logout">Déconnexion</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

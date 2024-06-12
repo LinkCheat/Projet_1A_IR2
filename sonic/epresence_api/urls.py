@@ -13,6 +13,13 @@ urlpatterns = [
     path('home/', views.HomeView, name='home'),
 
     path('Mes_absences/', views.Absences, name='absences_perso'),
+
+
+
+    path('profile/', views.StudentProfileView, name='student_profile'),
+
+
+    
     
     path('Espace_professeur/', views.ProfView, name='professeur'),
     path('Mes_cours/', views.emploi_du_temps_prof, name='emploi_prof'),

@@ -218,6 +218,26 @@ def download_csv(request):
     return response
 
 
+def StudentProfileView(request):
+    id = cache.get('id')
+
+    if id is None:
+        return redirect('/login/')
+
+    user = User.objects.get(username=id)
+    cache.set('id', user.username)
+    cache.set('email', user.email)
+    cache.set('first_name', user.first_name)
+    cache.set('last_name', user.last_name)
+
+    return render(request, 'epresence_api/student_profile.html', {
+        'username': user.username,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'email': user.email
+    })
+
+
 #csv creation
 """
 def mon_profil(request):
