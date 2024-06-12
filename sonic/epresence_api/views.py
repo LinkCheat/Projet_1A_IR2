@@ -5,6 +5,7 @@ from django.contrib import messages
 from epresence_api.models import *
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.views import PasswordResetView
 import csv
 import io
 from django.http import HttpResponse
@@ -350,4 +351,8 @@ def emploi_du_temps_prof(request):
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
-        
+class CustomPasswordResetView(PasswordResetView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['namespace'] = 'epresence_api'
+        return context
