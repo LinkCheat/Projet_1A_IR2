@@ -5,19 +5,11 @@ from django.contrib import messages
 from epresence_api.models import *
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.views import PasswordResetView
 import csv
 import io
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.db.models import Q
-
-
-class CustomPasswordResetView(PasswordResetView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['namespace'] = 'epresence_api'
-        return context
 
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
@@ -86,7 +78,7 @@ def StudentView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('/login')
+        return redirect('/')
     
     user = User.objects.get(username=id)
 
@@ -107,23 +99,20 @@ def ChangePassword(request):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Email incorrect!')
             return redirect(request.META.get('HTTP_REFERER', '/'))
         
     
         user = User.objects.get(email=email)
-        print(password)
-
 
         user.password=make_password(password)
-        return redirect('/')
+        user.save()
+
+        messages.success(request, 'Mot de passe changé avec succès!')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
         
     else:
         return render(request, 'epresence_api/change_password.html')
-    
-
-def resetPasswordView(request):
-    return render(request, 'epresence_api/resetpassword.html')
 
 def absProfView(request):
     return render(request, 'epresence_api/Absence_csv.html')
@@ -139,9 +128,11 @@ def Login(request):
 
          
 
-    
-        user = User.objects.get(email=email)
-
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'Email incorrect!')
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
         auth = authenticate(request, username=user.username, password=password)
 
@@ -428,4 +419,3 @@ def emploi_du_temps_prof(request):
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
         
-
