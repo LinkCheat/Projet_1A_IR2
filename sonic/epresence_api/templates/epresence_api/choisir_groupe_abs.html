@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
+    <title>Choisir un Groupe</title>
+    <style>
+        /* Style pour améliorer l'apparence du formulaire */
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Choisir un Groupe</h2>
+    <p>Utilisateur : {{ first_name }} {{ last_name }}</p>
+    <form method="post" action="{% url 'epresence_api:choisir_groupe_abs' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="group" class="form-label">Sélectionnez un groupe :</label>
+        <select name="group" id="group" class="form-control">
+          {% for row in groupes %}
+            <option value="{{ row.NomGroupe }}">{{ row.NomGroupe }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Suivant</button>
+    </form>
+  </div>
+</body>
+</html>

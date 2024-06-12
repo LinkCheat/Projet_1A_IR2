@@ -25,12 +25,16 @@ urlpatterns = [
     path('notes_eleve/', views.Notes_eleve, name='notes_eleve'),
     
     path('choisir_groupe/', views.choisir_groupe, name='choisir_groupe'),
+    path('choisir_groupe_abs/', views.choisir_groupe_abs, name='choisir_groupe_abs'),
 
     path('choisir_matiere/', views.choisir_matiere, name='choisir_matiere'),
 
-    path('saisir_note/', views.eleves_liste, name='saisir_note'),
+    path('saisir_note/', views.eleves_liste_notes, name='saisir_note'),
     path('soumettre_notes/', views.soumettre_notes, name='soumettre_notes'),
     
+    path('saisir_abs/', views.eleves_liste_abs, name='saisir_abs'),
+    path('soumettre_abs/', views.soumettre_abs, name='soumettre_abs'),
+
     path('reset_password/',views.ChangePassword, name='reset_password'),
         
     path('verify/', views.empty_verify_view, name='empty-verify-view'),
