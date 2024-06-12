@@ -202,7 +202,7 @@ def download_csv(request):
 
 
 #csv creation
-
+"""
 def mon_profil(request):
     user = request.user
     profile = StudentProfile.objects.get(user=user)  # Adjust based on your actual profile model
@@ -224,6 +224,7 @@ def mon_profil(request):
         'profile': profile,
         'form': form
     })
+"""
 
 def Notes_eleve(request):
     csv = get_csv_cache('notes_eleve')

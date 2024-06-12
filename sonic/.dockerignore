@@ -3,4 +3,5 @@
 dockerfile
 
 /staticfiles
-/static/epresence_api/unused_style_sheets
+/epresence_api/static/epresence_api/unused_style_sheets
+/epresence_api/templates/epresence_api/unused_templates

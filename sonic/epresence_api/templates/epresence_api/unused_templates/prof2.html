@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/acceuilprof.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    {% endblock %}
+    <title>e-Presence</title>
+</head>
+<body>
+    <header>
+        <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div id="user-info">
+            <span>E-PRESENCE</span>
+            <span>USER</span>
+        </div>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="e-Presence Logo" class="logo">
+            <span class="year">2023/2024</span>
+        </div>
+        <nav>
+            <a href="{% url 'epresence_api:absences_perso' %}" class="btn btn-primary">Mes absences</a>
+            <a href="{% url 'epresence_api:emploi_prof' %}" class="btn btn-primary">Mon emplois du temps</a>
+            <a href="{% url 'epresence_api:notes_prof' %}" class="btn btn-primary">Notes étudiants</a>  
+            <a href="{% url 'epresence_api:absences_cours' %}" class="btn btn-primary">Absences étudiants</a>  
+        </nav>
+        <div class="user-info">
+            <p>{{ user.username }} {{ user.first_name }} {{ user.last_name }}</p>
+        </div>
+    </div>
+    <div class="main-content" id="main-content">
+        <h2>mon Espace E-presence</h2>
+        <h2>{{ content.title }}</h2>
+        <p>{{ content.detail }}</p>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            if (sidebar.classList.contains('expanded')) {
+                sidebar.classList.remove('expanded');
+                mainContent.classList.remove('shifted');
+            } else {
+                sidebar.classList.add('expanded');
+                mainContent.classList.add('shifted');
+            }
+        }
+    </script>
+</body>
+</html>
