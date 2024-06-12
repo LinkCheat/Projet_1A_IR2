@@ -188,9 +188,9 @@ def HomeView(request):
     try:
         prof = Professeur.objects.get(id_professor=user.id)
         if prof:
-            return redirect('/Espace_professeur')
+            return redirect('/Espace_professeur/')
     except ObjectDoesNotExist:
-        return redirect('/Espace_etudiant')
+        return redirect('/Espace_etudiant/')
     
 def LogoutView(request):
     cache.clear()
