@@ -421,23 +421,25 @@ def emploi_du_temps_prof(request):
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
 
 
-#statistic
+#statistic .filter(id_professor=id)
 
 def stat_moyenne_par_matiere_prof(request):
     id=cache.get('id')
+    id=User.objects.get(username=id).pk
     c = Matiere.objects.all().filter(id_professor=id).values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
     d = Note.objects.all().values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
     matiere = [item for item in c]
     note = [item for item in d]
     data2=[]
-    
+    print(note)  
+    print(matiere)  
     for i in note:
         for y in matiere:
             if y[0] == i[1]:
                 data2.append([y[1],i[2],i[3]])
                 
                 
-                
+    print(data2)           
     data3=[]           
     for i in data2:
         s=i
@@ -450,19 +452,22 @@ def stat_moyenne_par_matiere_prof(request):
         data3.append(s)
     labels = []
     data = []
+    print(data3)
     for i in data3:
         labels = labels+[i[0]]
         data = data+[i[1]]
-            
+    
+    nom_graphique = 'Moyenne par matiere',
     context = {
         'nom_graphique': 'Moyenne par matiere',  
         'labels': labels,
         'data': data
     }
-    return render(request, 'epresence_api/graphe.html',{'data_from_django':context})
+    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
 
 def stat_note_par_matiere_eleve(request):
     id=cache.get('id')
+    id=User.objects.get(username=id).pk
     c = Matiere.objects.all().values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
     d = Note.objects.all().filter(id_student=id).values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
     matiere = [item for item in c]
@@ -481,12 +486,12 @@ def stat_note_par_matiere_eleve(request):
     for i in data2:
         labels = labels+[i[2]]
         data = data+[i[1]]
-            
+        
+    nom_graphique = 'Note par matiere',   
     context = {
             
         'nom_graphique': 'Note par matiere',
         'labels': labels,
         'data': data
     }
-    return render(request, 'epresence_api/graphe.html',{'data_from_django':context})
-        
+    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
