@@ -9,28 +9,32 @@
     {% block styles %}
     <link rel="stylesheet" href="{% static 'epresence_api/styles/accueil.css' %}">
     {% endblock %}
-    <title>e-Presence</title>
+    
+    <title>Login Page</title>
 </head>
 <body>
-    <header>
-        <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
-        <div id="user-info">
-            <span>E-PRESENCE</span>
-            <span>USER</span>
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <!-- Page title -->
+        <h1 class="mb-4 page-title">Mon Espace Professeur</h1>
+        <div class="button-row">
+            <!-- Links to different pages using Django's URL template tag -->
+            <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Mon profil</a>
+            <a href="{% url 'epresence_api:absences_perso' %}" class="btn btn-primary">Mes absences</a>
+            <a href="{% url 'epresence_api:emploi_prof' %}" class="btn btn-primary">Mon emplois du temps</a>
+            <a href="{% url 'epresence_api:notes_prof' %}" class="btn btn-primary">Notes étudiants</a>  
+            <a href="{% url 'epresence_api:absences_cours' %}" class="btn btn-primary">Absences étudiants</a>  
         </div>
-    </header>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="e-Presence Logo" class="logo">
-            <span class="year">2023/2024</span>
-        </div>
-        <nav>
-            <a href="{% url 'epresence_api:notes_prof' %}">Évaluation</a>
-            <a href="{% url 'epresence_api:absences_cours' %}">Absences</a>
-        </nav>
-        <div class="user-info">
-            <p>{{ user.username }} {{ user.first_name }} {{ user.last_name }}</p>
-        </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- User logo -->
+    <div class="user-logo">
+        <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="User Logo">
+    </div>
+    <!-- App name -->
+    <div class="app-name">
+        <h2>Mon Espace Professeur</h2>
     </div>
     <!-- Student name -->
     <div class="student-name">
