@@ -182,5 +182,3 @@ CACHES = {
 }
 
 APPEND_SLASH = False
-
-PASSWORD_RESET_EMAIL_TEMPLATE = 'epresence_api/email_template.html'
