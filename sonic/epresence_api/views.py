@@ -63,7 +63,7 @@ def ProfView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     
     user = User.objects.get(username=id)
 
@@ -108,12 +108,17 @@ def Login(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        
+
+         
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             messages.error(request, 'User does not exist')
             return redirect(request.META.get('HTTP_REFERER', '/'))
+        
+    
+        user = User.objects.get(email=email)
+
 
         auth = authenticate(request, username=user.username, password=password)
 
@@ -133,9 +138,9 @@ def Login(request):
                 a = None
 
             if (a!=None):
-                return redirect('/home')
+                return redirect('/home/')
             else: 
-                return redirect('/admin')
+                return redirect('/admin/')
     
         else:
             return render(request, 'epresence_api/login.html')
@@ -148,7 +153,7 @@ def HomeView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     
     user = User.objects.get(username=id)
 
@@ -236,7 +241,7 @@ def Notes_eleve(request):
     csv = get_csv_cache('notes_eleve')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -254,7 +259,7 @@ def Notes_prof(request):
     csv = get_csv_cache('notes_prof')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -274,7 +279,7 @@ def Absences(request):
     csv = get_csv_cache('absences_personnelles')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -292,7 +297,7 @@ def Absences_cours(request):
     csv = get_csv_cache('absences_cours')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -316,7 +321,7 @@ def emploi_du_temps_eleve(request):
     csv = get_csv_cache('emploi_du_temps_eleve')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -335,7 +340,7 @@ def emploi_du_temps_prof(request):
     csv = get_csv_cache('emploi_du_temps_prof')
     id = cache.get('id')
     if id == None:
-        return redirect('/login')
+        return redirect('/login/')
     user = User.objects.get(username=id)
     
     if csv == None:
