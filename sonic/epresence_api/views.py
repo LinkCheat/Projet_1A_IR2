@@ -69,7 +69,7 @@ def ProfView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('')
+        return redirect('/')
     
     user = User.objects.get(username=id)
 
@@ -159,7 +159,7 @@ def HomeView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     
     user = User.objects.get(username=id)
 
@@ -247,22 +247,22 @@ def Notes_eleve(request):
     csv = get_csv_cache('notes_eleve')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
 
-        data = Note.objects.all().values_list('id_student','note','id_matiere')
+        data = Note.objects.all().values_list('id_student','note','id_matiere','date_evaluation','type_evaluation','remarque')
         data = data.filter(id_student = user)
-        data = data.values_list('id_matiere','note').order_by('id_matiere')
+        data = data.values_list('id_matiere','note','date_evaluation','type_evaluation','remarque').order_by('date_evaluation')
 
         new_data = []
         for row in data:
             matiere_obj = Matiere.objects.get(pk=row[0])
-            new_row = (str(matiere_obj), row[1])
+            new_row = (str(matiere_obj), row[1], row[2], row[3], row[4])
             new_data.append(new_row)
 
-        csv_cache('notes_eleve',['matiere','note'],new_data)
+        csv_cache('notes_eleve',['Matière','Note','Date','Type d\'évaluation','Remarque'],new_data)
         csv = get_csv_cache('notes_eleve')
 
 
@@ -274,26 +274,26 @@ def Notes_prof(request):
     csv = get_csv_cache('notes_prof')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
 
         matiere = Matiere.objects.filter(id_professor=user.id)
-        data = Note.objects.all().values_list('id_student','note','id_matiere')
+        data = Note.objects.all().values_list('id_student','note','id_matiere','date_evaluation','type_evaluation','remarque')
         matiere_ids = matiere.values_list('id_matiere', flat=True)
         data = data.filter(id_matiere__in=matiere_ids)
-        data = data.values_list('id_student','note','id_matiere').order_by('id_matiere')
+        data = data.values_list('id_student','note','id_matiere','date_evaluation','type_evaluation','remarque').order_by('id_matiere')
 
         new_data = []
         for row in data:
             student_obj = User.objects.get(pk=row[0])
             matiere_obj = Matiere.objects.get(pk=row[2])
 
-            new_row = (str(student_obj), row[1], str(matiere_obj))
+            new_row = (str(student_obj), row[1], str(matiere_obj), row[3], row[4], row[5])
             new_data.append(new_row)
 
-        csv_cache('notes_prof',['etudiant','note','matiere'],new_data)
+        csv_cache('notes_prof',['Etudiant','Note','Matière','Date','Type d\'évaluation','Remarque'],new_data)
         csv = get_csv_cache('notes_prof')
 
     csv_download_applicate('notes_prof')
@@ -303,7 +303,7 @@ def Absences(request):
     csv = get_csv_cache('absences_personnelles')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -319,7 +319,7 @@ def Absences(request):
             new_row = (str(student_obj), row[1], str(seance_obj))
             new_data.append(new_row)
 
-        csv_cache('absences_personnelles',['seance numéro','motif'],new_data)
+        csv_cache('absences_personnelles',['Cours','Motif'],new_data)
         csv = get_csv_cache('absences')
 
     csv_download_applicate('absences_personnelles')
@@ -329,7 +329,7 @@ def Absences_cours(request):
     csv = get_csv_cache('absences_cours')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -351,7 +351,7 @@ def Absences_cours(request):
             new_data.append(new_row)
 
         
-        csv_cache('absences_cours',['etudiant','motif','seance'],new_data)
+        csv_cache('absences_cours',['Etudiant','Motif','Cours'],new_data)
         csv = get_csv_cache('absences_cours')
 
     csv_download_applicate('absences_cours')
@@ -362,7 +362,7 @@ def emploi_du_temps_eleve(request):
     csv = get_csv_cache('emploi_du_temps_eleve')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -378,7 +378,7 @@ def emploi_du_temps_eleve(request):
             new_row = (str(matiere_obj), row[1], row[2], row[3], row[4], row[5])
             new_data.append(new_row)
 
-        csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],new_data)
+        csv_cache('emploi_du_temps_eleve',['Matière','Date','Heure de début','Heure de fin','Salle','Type de cours'],new_data)
         csv = get_csv_cache('emploi_du_temps_eleve')
 
     csv_download_applicate('emploi_du_temps_eleve')
@@ -388,7 +388,7 @@ def emploi_du_temps_prof(request):
     csv = get_csv_cache('emploi_du_temps_prof')
     id = cache.get('id')
     if id == None:
-        return redirect('/login/')
+        return redirect('/')
     user = User.objects.get(username=id)
     
     if csv == None:
@@ -405,7 +405,7 @@ def emploi_du_temps_prof(request):
             new_row = (str(matiere_obj), row[1], row[2], row[3], row[4], row[5])
             new_data.append(new_row)
 
-        csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],new_data)
+        csv_cache('emploi_du_temps_prof',['Matière','Date','Heure de début','Heure de fin','Salle','Type de cours'],new_data)
         csv = get_csv_cache('emploi_du_temps_prof')
 
     csv_download_applicate('emploi_du_temps_prof')
