@@ -1,0 +1,88 @@
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  form input, form select {
+    padding: 10px;
+    background-color: #444;
+    border: 1px solid #555;
+    color: #fff;
+  }
+  
+  form input:read-only {
+    background-color: #555;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-left: 20px; /* Ajoute une marge à gauche du tableau */
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #555;
+  }
+  
+  th {
+    background-color: #444;
+  }
+  
+  td input[type="checkbox"] {
+    transform: scale(1.5); /* Agrandir les cases à cocher */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px; /* Ajoute une marge à droite du bouton */
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center; /* Centre la pagination */
+    list-style: none;
+    gap: 5px;
+  }
+  
+  .pagination li {
+    background-color: #444;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .pagination li a {
+    color: #4CAF50; /* Liens en vert */
+    text-decoration: none;
+  }
+  
+  .pagination li a:hover {
+    color: #45a049; /* Couleur plus claire au survol */
+  }
+  
+  .pagination .active a {
+    color: #fff;
+  }
+  

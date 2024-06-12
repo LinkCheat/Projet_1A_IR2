@@ -15,11 +15,12 @@ urlpatterns = [
     path('Mes_cours/', views.emploi_du_temps_prof, name='emploi_prof'),
 
     
-    
+    path('mon-profil/', mon_profil, name='mon_profil'),
     path('etudiant/', views.StudentView, name='etudiant'),
     path('Emplois_du_temps/', views.emploi_du_temps_eleve, name='emploi_eleve'),
     path('notes/', views.Notes_eleve, name='notes'),
     path('absences/', views.Absences, name='absences'),
+    path('mes-absences/', absences_eleve, name='mes_absences'),
     
     
     path('password/', views.ChangePasswordView, name='change_password'),
