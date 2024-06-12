@@ -68,6 +68,9 @@ def ChangePasswordView(request):
 
 def resetPasswordView(request):
     return render(request, 'epresence_api/resetpassword.html')
+
+def absProfView(request):
+    return render(request, 'epresence_api/Absence_csv.html')
     
 # API pour la page du login
 def Login(request):
