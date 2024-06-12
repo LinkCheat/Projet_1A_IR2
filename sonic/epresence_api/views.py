@@ -486,6 +486,15 @@ def stat_note_par_matiere_eleve(request):
     for i in data2:
         labels = labels+[i[2]]
         data = data+[i[1]]
+
+    nom_graphique = 'Note par matiere',   
+    context = {
+            
+        'nom_graphique': 'Note par matiere',
+        'labels': labels,
+        'data': data
+    }
+    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
         
 
 
@@ -658,14 +667,7 @@ def soumettre_abs(request):
 
     return redirect('/Espace_professeur/')
 
-    nom_graphique = 'Note par matiere',   
-    context = {
-            
-        'nom_graphique': 'Note par matiere',
-        'labels': labels,
-        'data': data
-    }
-    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
+
 
 
 # Afficher les groupes
