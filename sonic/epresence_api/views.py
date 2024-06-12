@@ -69,7 +69,7 @@ def ProfView(request):
     id = cache.get('id')
 
     if id == None:
-        return redirect('/login/')
+        return redirect('')
     
     user = User.objects.get(username=id)
 
@@ -265,8 +265,10 @@ def Notes_eleve(request):
         csv_cache('notes_eleve',['matiere','note'],new_data)
         csv = get_csv_cache('notes_eleve')
 
+
+
     csv_download_applicate('notes_eleve')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Notes'})
 
 def Notes_prof(request):
     csv = get_csv_cache('notes_prof')
@@ -295,7 +297,7 @@ def Notes_prof(request):
         csv = get_csv_cache('notes_prof')
 
     csv_download_applicate('notes_prof')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Notes'})
 
 def Absences(request):
     csv = get_csv_cache('absences_personnelles')
@@ -321,7 +323,7 @@ def Absences(request):
         csv = get_csv_cache('absences')
 
     csv_download_applicate('absences_personnelles')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Absences personnelles'})
 
 def Absences_cours(request):
     csv = get_csv_cache('absences_cours')
@@ -353,7 +355,7 @@ def Absences_cours(request):
         csv = get_csv_cache('absences_cours')
 
     csv_download_applicate('absences_cours')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Absences aux cours'})
 
 
 def emploi_du_temps_eleve(request):
@@ -380,7 +382,7 @@ def emploi_du_temps_eleve(request):
         csv = get_csv_cache('emploi_du_temps_eleve')
 
     csv_download_applicate('emploi_du_temps_eleve')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
 
 def emploi_du_temps_prof(request):
     csv = get_csv_cache('emploi_du_temps_prof')
@@ -407,6 +409,6 @@ def emploi_du_temps_prof(request):
         csv = get_csv_cache('emploi_du_temps_prof')
 
     csv_download_applicate('emploi_du_temps_prof')
-    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
+    return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
         
 

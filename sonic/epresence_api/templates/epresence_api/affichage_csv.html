@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'epresence_api/styles/affichage_csv.css' %}"/>
     {% endblock %}
-    <title>Get Session</title>
+    <title>{{ title }}</title>
 </head>
 <body>
     <div class="container">
+        <h3>{{ title }}</h3>
         <h4>{{ first_name }} {{ last_name }}</h4>
         <table>
             <thead>
