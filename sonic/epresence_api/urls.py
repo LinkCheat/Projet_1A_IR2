@@ -24,6 +24,11 @@ urlpatterns = [
     path('Emplois_du_temps/', views.emploi_du_temps_eleve, name='emploi_eleve'),
     path('notes_eleve/', views.Notes_eleve, name='notes_eleve'),
     
+    path('choisir_groupe/', views.choisir_groupe, name='choisir_groupe'),
+
+    path('choisir_matiere/', views.choisir_matiere, name='choisir_matiere'),
+
+    path('saisir_note/', views.eleves_liste, name='saisir_note'),
     
     path('reset_password/',views.ChangePassword, name='reset_password'),
         
