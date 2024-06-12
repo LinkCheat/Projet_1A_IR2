@@ -9,6 +9,13 @@
     <title>Login Page</title>
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+        <script>
+            alert("{{ message }}");
+        </script>
+        {% endfor %}
+    {% endif %}
     <section class="login-container">
         <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="e-Presence Logo" class="logo">
         <h2>Mon Espace e-presence</h2>

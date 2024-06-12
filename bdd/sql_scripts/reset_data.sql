@@ -361,6 +361,7 @@ INSERT INTO `seance` (`Matière`, `Groupe`, `Date`, `Heure début`, `Heure fin`,
 ('IR-6.3.2', 4, '2024-06-11', '14:00', '18:00', 'PC_3', 'TP'),
 ('IR-6.1.5', 5, '2024-06-11', '14:00', '18:00', 'PC_MASTER', 'TP');
 
+
 INSERT INTO `absence` (`Etudiant`, `Séance`, `Motif`) VALUES
 ( 209, 1, 'Rendez-vous médical'),
 ( 210, 1, 'Urgence familiale'),

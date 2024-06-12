@@ -107,7 +107,13 @@ def Login(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        user = User.objects.get(email=email)
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist')
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+
         auth = authenticate(request, username=user.username, password=password)
 
         if auth is not None:
