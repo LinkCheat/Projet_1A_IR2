@@ -459,7 +459,7 @@ def stat_moyenne_par_matiere_prof(request):
     
     nom_graphique = 'Moyenne par matiere',
     context = {
-        'nom_graphique': 'Moyenne par matiere',  
+        
         'labels': labels,
         'data': data
     }
@@ -484,13 +484,12 @@ def stat_note_par_matiere_eleve(request):
     labels = []
     data = []
     for i in data2:
-        labels = labels+[i[2]]
+        labels = labels+[i[0]]
         data = data+[i[1]]
 
     nom_graphique = 'Note par matiere',   
     context = {
             
-        'nom_graphique': 'Note par matiere',
         'labels': labels,
         'data': data
     }
