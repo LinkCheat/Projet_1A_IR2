@@ -57,7 +57,8 @@ def LoginView(request):
     return render(request, 'epresence_api/login.html')
 
 def ProfView(request):
-    return render(request, 'epresence_api/prof.html')
+    user = User.objects.get(username=id)
+    return render(request, 'epresence_api/prof.html',{'user':user})
 
 def StudentView(request):
     return render(request, 'epresence_api/student.html')
