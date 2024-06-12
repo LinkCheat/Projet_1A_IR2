@@ -72,7 +72,7 @@ def ProfView(request):
     cache.set('last_name', user.last_name)
 
 
-    return render(request, 'epresence_api/prof2.html', {'username':user.username,'first_name':user.first_name,'last_name':user.last_name})
+    return render(request, 'epresence_api/prof.html', {'username':user.username,'first_name':user.first_name,'last_name':user.last_name})
 
 def StudentView(request):
 
