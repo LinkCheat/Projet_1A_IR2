@@ -278,8 +278,6 @@ def emploi_du_temps_prof(request):
     if id == None:
         return redirect('/login')
     user = User.objects.get(username=id)
-
-
     
     if csv == None:
         
