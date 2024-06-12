@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
+    <title>Choix Classe</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Choisir la Classe</h2>
+    <form action="{% url 'epresence_api:select_class' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="classe" class="form-label">Classe</label>
+        <select id="classe" name="classe" class="form-control">
+          <!-- Add your class options here -->
+          <option value="classe1">Classe 1</option>
+          <option value="classe2">Classe 2</option>
+          <!-- More classes can be added here -->
+        </select>
+      </div>
+      <button type="submit" class="button">Valider</button>
+    </form>
+  </div>
+</body>
+</html>
