@@ -109,7 +109,7 @@ def ChangePassword(request):
         user.save()
 
         messages.success(request, 'Mot de passe changé avec succès!')
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+        return redirect('/')
         
     else:
         return render(request, 'epresence_api/change_password.html')
