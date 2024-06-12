@@ -20,16 +20,11 @@ urlpatterns = [
     path('notes_prof/', views.Notes_prof, name='notes_prof'),
     path('Absences_élèves/', views.Absences_cours, name='absences_cours'),
     
-    path('mon-profil/', mon_profil, name='mon_profil'),
-    path('etudiant/', views.StudentView, name='etudiant'),
     
     path('Espace_etudiant/', views.StudentView, name='etudiant'),
     path('Emplois_du_temps/', views.emploi_du_temps_eleve, name='emploi_eleve'),
     path('notes_eleve/', views.Notes_eleve, name='notes_eleve'),
     
-    path('notes/', views.Notes_eleve, name='notes'),
-    path('absences/', views.Absences, name='absences'),
-    path('mes-absences/', absences_eleve, name='mes_absences'),
     
     
     path('password/', views.ChangePasswordView, name='change_password'),
