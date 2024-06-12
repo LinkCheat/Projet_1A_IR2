@@ -363,3 +363,16 @@ INSERT INTO `absence` (`Etudiant`, `Séance`, `Motif`) VALUES
 ( 219, 2, 'Rendez-vous médical'),
 ( 220, 2, 'Problèmes de transport'),
 ( 221, 2, 'Raisons personnelles');
+
+INSERT INTO `professeur` (`Professeur`) VALUES
+(231),
+(232),
+(233),
+(234),
+(235),
+(236),
+(237),
+(238),
+(239),
+(240),
+(241);

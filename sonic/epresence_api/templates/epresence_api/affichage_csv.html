@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block styles %}
     <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/affichage_csv.css' %}"/>
     {% endblock %}
     <title>Get Session</title>
 </head>
@@ -33,8 +34,7 @@
     </div>
     <div class="button-row">
         <a href="{% url 'epresence_api:download_csv' %}" class="btn btn-primary">Télécharger</a>
-    </div>
-    <div class="button-row">
+        <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Retour</a>
         <a href="{% url 'epresence_api:logout' %}" class="btn btn-primary">Déconnexion</a>
     </div>
 </body>

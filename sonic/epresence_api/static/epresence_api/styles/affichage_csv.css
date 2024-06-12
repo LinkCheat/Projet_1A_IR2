@@ -1,0 +1,20 @@
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacement entre les boutons */
+}
+  
+.btn-primary {
+    background-color: #bad8b6; /* Gris foncé */
+    border: none;
+    color: #2c2c2c;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+  
+.btn-primary:hover {
+    background-color: #61b390; /* Vert foncé */
+}

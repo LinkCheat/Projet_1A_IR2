@@ -48,6 +48,19 @@ class Eleve(models.Model):
     def __str__(self):
         return str(self.id_student.username)
     
+class Professeur(models.Model):
+    id_professor = models.OneToOneField(User, on_delete=models.CASCADE, db_column='Professeur', blank=False, null=False, related_name='professor_group')  # Field name made lowercase. Field renamed to remove unsuitable characters.
+
+    class Meta:
+        managed = True
+        db_table = 'professeur'
+        constraints = [
+            models.UniqueConstraint(fields=['id_professor'], name='unique_professor_professor')
+        ]
+        
+    def __str__(self):
+        return str(self.id_professor.username)
+    
 
 class Note(models.Model):
     id_student = models.ForeignKey(User, on_delete=models.CASCADE, db_column='Etudiant', blank=False, null=False, related_name='student_note')  # Field name made lowercase. Field renamed to remove unsuitable characters.    
