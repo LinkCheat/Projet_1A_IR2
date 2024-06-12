@@ -3,7 +3,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(('epresence_api.urls'))),
+    path('', include('epresence_api.urls')),
 ]
 
 handler400 = 'epresence_api.views.error_400'
