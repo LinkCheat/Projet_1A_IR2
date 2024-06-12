@@ -13,6 +13,12 @@ from django.http import HttpResponse
 from django.db.models import Q
 
 
+class CustomPasswordResetView(PasswordResetView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['namespace'] = 'epresence_api'
+        return context
+
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
 def csv_cache(name, titre_csv, data):
@@ -249,7 +255,14 @@ def Notes_eleve(request):
         data = Note.objects.all().values_list('id_student','note','id_matiere')
         data = data.filter(id_student = user)
         data = data.values_list('id_matiere','note').order_by('id_matiere')
-        csv_cache('notes_eleve',['matiere','note'],data)
+
+        new_data = []
+        for row in data:
+            matiere_obj = Matiere.objects.get(pk=row[0])
+            new_row = (str(matiere_obj), row[1])
+            new_data.append(new_row)
+
+        csv_cache('notes_eleve',['matiere','note'],new_data)
         csv = get_csv_cache('notes_eleve')
 
     csv_download_applicate('notes_eleve')
@@ -269,7 +282,16 @@ def Notes_prof(request):
         matiere_ids = matiere.values_list('id_matiere', flat=True)
         data = data.filter(id_matiere__in=matiere_ids)
         data = data.values_list('id_student','note','id_matiere').order_by('id_matiere')
-        csv_cache('notes_prof',['etudiant','note','matiere'],data)
+
+        new_data = []
+        for row in data:
+            student_obj = User.objects.get(pk=row[0])
+            matiere_obj = Matiere.objects.get(pk=row[2])
+
+            new_row = (str(student_obj), row[1], str(matiere_obj))
+            new_data.append(new_row)
+
+        csv_cache('notes_prof',['etudiant','note','matiere'],new_data)
         csv = get_csv_cache('notes_prof')
 
     csv_download_applicate('notes_prof')
@@ -287,7 +309,15 @@ def Absences(request):
         data = Absence.objects.all().values_list('id_student','motif','seance')
         data = data.filter(id_student = user)
         data = data.values_list('seance','motif').order_by('seance')
-        csv_cache('absences_personnelles',['seance numéro','motif'],data)
+
+        new_data = []
+        for row in data:
+            student_obj = User.objects.get(pk=row[0])
+            seance_obj = Seance.objects.get(pk=row[2])
+            new_row = (str(student_obj), row[1], str(seance_obj))
+            new_data.append(new_row)
+
+        csv_cache('absences_personnelles',['seance numéro','motif'],new_data)
         csv = get_csv_cache('absences')
 
     csv_download_applicate('absences_personnelles')
@@ -310,7 +340,16 @@ def Absences_cours(request):
         data = Absence.objects.all().values_list('id_student','motif','seance')
         data = data.filter(seance__in=seance_ids)
         data = data.values_list('id_student','motif','seance').order_by('seance')
-        csv_cache('absences_cours',['etudiant','motif','seance'],data)
+        
+        new_data = []
+        for row in data:
+            student_obj = User.objects.get(pk=row[0])
+            seance_obj = Seance.objects.get(pk=row[2])
+            new_row = (str(student_obj), row[1], str(seance_obj))
+            new_data.append(new_row)
+
+        
+        csv_cache('absences_cours',['etudiant','motif','seance'],new_data)
         csv = get_csv_cache('absences_cours')
 
     csv_download_applicate('absences_cours')
@@ -329,8 +368,15 @@ def emploi_du_temps_eleve(request):
         eleve = Eleve.objects.get(id_student=user.id)
         data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         data = data.filter(Q(id_group=eleve.Classe) | Q(id_group=eleve.TD) | Q(id_group=eleve.TP))
-        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('date').order_by('heure_debut')
-        csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('heure_debut').order_by('date')
+
+        new_data = []
+        for row in data:
+            matiere_obj = Matiere.objects.get(pk=row[0])
+            new_row = (str(matiere_obj), row[1], row[2], row[3], row[4], row[5])
+            new_data.append(new_row)
+
+        csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],new_data)
         csv = get_csv_cache('emploi_du_temps_eleve')
 
     csv_download_applicate('emploi_du_temps_eleve')
@@ -349,15 +395,18 @@ def emploi_du_temps_prof(request):
         data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         matiere_ids = matiere.values_list('id_matiere', flat=True)
         data = data.filter(id_matiere__in=matiere_ids)
-        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('date').order_by('heure_debut')
-        csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('heure_debut').order_by('date')
+
+        new_data = []
+        for row in data:
+            matiere_obj = Matiere.objects.get(pk=row[0])
+            new_row = (str(matiere_obj), row[1], row[2], row[3], row[4], row[5])
+            new_data.append(new_row)
+
+        csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],new_data)
         csv = get_csv_cache('emploi_du_temps_prof')
 
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
-class CustomPasswordResetView(PasswordResetView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['namespace'] = 'epresence_api'
-        return context
+
