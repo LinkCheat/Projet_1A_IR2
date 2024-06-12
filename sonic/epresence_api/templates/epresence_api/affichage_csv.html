@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     {% block styles %}
     <link rel="stylesheet" href="{% static 'epresence_api/styles/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'epresence_api/styles/affichage_csv.css' %}"/>
     {% endblock %}
-    <title>Get Session</title>
+    <title>{{ title }}</title>
 </head>
 <body>
+    <div class="bouton">
+        <div class="button-row">
+            <a href="{% url 'epresence_api:download_csv' %}" class="btn btn-primary">Télécharger</a>
+            <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Retour</a>
+            <a href="{% url 'epresence_api:logout' %}" class="btn btn-danger">Déconnexion</a>
+        </div>
+    </div>
     <div class="container">
-        <h4>{{ first_name }} {{ last_name }}</h4>
+        <h3>{{ title }} de {{ first_name }} {{ last_name }}</h3>
         <table>
             <thead>
                 <tr>
@@ -32,13 +38,6 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    <div class="button-row">
-        <a href="{% url 'epresence_api:download_csv' %}" class="btn btn-primary">Télécharger</a>
-        <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Retour</a>
-    </div>
-    <div class="logout">
-        <a href="{% url 'epresence_api:logout' %}" class="btn btn-danger">Déconnexion</a>
     </div>
 </body>
 </html>
