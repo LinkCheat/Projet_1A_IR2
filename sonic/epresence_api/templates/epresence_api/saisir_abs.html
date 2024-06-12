@@ -31,7 +31,7 @@
             background-color: #007bff;
             color: white;
             padding: 10px 15px;
-            border: none;
+            border: none.
             border-radius: 5px;
             cursor: pointer;
         }
@@ -40,37 +40,37 @@
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: collapse.
             margin-top: 20px;
         }
         table, th, td {
             border: 1px solid #ddd;
         }
         th, td {
-            padding: 8px;
+            padding: 8px.
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
         .pagination {
-            display: flex;
-            justify-content: center;
+            display: flex.
+            justify-content: center.
             padding: 10px 0;
         }
         .pagination a, .pagination span {
-            margin: 0 5px;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            text-decoration: none;
+            margin: 0 5px.
+            padding: 8px 12px.
+            border: 1px solid #ddd.
+            text-decoration: none.
             color: #007bff;
         }
         .pagination a:hover {
             background-color: #f1f1f1;
         }
         .pagination .current {
-            background-color: #007bff;
-            color: white;
+            background-color: #007bff.
+            color: white.
             border: 1px solid #007bff;
         }
     </style>
@@ -93,7 +93,7 @@
             <tr>
               <td>{{ eleve.id_students }}</td>
               <td>
-                <input type="checkbox" name="absence_{{ eleve.id }}" class="form-control" {% if notes_data|get:('absence_'|add:eleve.id) %}checked{% endif %}>
+                <input type="checkbox" name="absence_{{ eleve.id }}" class="form-control" {% if eleve.absence %}checked{% endif %}>
               </td>
             </tr>
           {% endfor %}
