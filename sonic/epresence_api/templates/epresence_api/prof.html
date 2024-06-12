@@ -25,8 +25,8 @@
             <span class="year">2023/2024</span>
         </div>
         <nav>
-            <a href="{% url 'epresence_api:notes' %}">Évaluation</a>
-            <a href="{% url 'epresence_api:absences' %}">Absences</a>
+            <a href="{% url 'epresence_api:notes_prof' %}">Évaluation</a>
+            <a href="{% url 'epresence_api:absences_cours' %}">Absences</a>
         </nav>
         <div class="user-info">
             <p>{{ user.username }} {{ user.first_name }} {{ user.last_name }}</p>
