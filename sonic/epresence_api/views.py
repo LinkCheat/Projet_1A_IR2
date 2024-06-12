@@ -495,37 +495,6 @@ def stat_note_par_matiere_eleve(request):
         'data': data
     }
     return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
-        
-
-
-# Afficher seance 
-"""
-def choisir_seance(request):
-    csv = get_csv_cache('seance')
-    id = cache.get('id')
-    if id is None:
-        return redirect('/login/')
-    user = User.objects.get(username=id)
-    
-    if csv is None:
-        s_groupe = cache.get('selected_group')
-        data = Seance.objects.filter(id_group=s_groupe).values_list('id', 'id_matiere', 'date', 'heure_debut', 'heure_fin', 'salle', 'type_cours')
-        new_data = []
-        for row in data:
-            matiere_obj = Matiere.objects.get(pk=row[1])
-            new_row = (row[0], str(matiere_obj), row[2], row[3], row[4], row[5], row[6])  # Inclure l'ID et les autres détails dans new_row
-            new_data.append(new_row)
-        csv_cache('seance', ['id', 'Matiere', 'Date', 'Heure_debut', 'Heure_fin', 'Salle', 'Type_cours'], new_data)
-        csv = get_csv_cache('seance')
-
-    if request.method == 'POST':
-        selected_seance = request.POST.get('seance')
-        cache.set('selected_seance', selected_seance)
-        return redirect('/saisir_abs/')  # Ajustez cette redirection selon vos besoins
-
-    return render(request, 'epresence_api/choisir_seance.html', {'first_name': user.first_name, 'last_name': user.last_name, 'seances': csv})
-
-"""
 
 # La saisie des notes
 from django.core.paginator import Paginator
