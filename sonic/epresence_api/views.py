@@ -9,7 +9,7 @@ from django.contrib.auth.views import PasswordResetView
 import csv
 import io
 from django.http import HttpResponse
-
+from django.contrib.auth.hashers import make_password
 from django.db.models import Q
 
 
@@ -97,8 +97,30 @@ def StudentView(request):
 
     return render(request, 'epresence_api/student.html', {'username':user.username,'first_name':user.first_name,'last_name':user.last_name})
 
-def ChangePasswordView(request):
-    return render(request, 'epresence_api/Password.html')
+def ChangePassword(request):
+
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+
+         
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist')
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        
+    
+        user = User.objects.get(email=email)
+        print(password)
+
+
+        user.password=make_password(password)
+        return redirect('/')
+        
+    else:
+        return render(request, 'epresence_api/change_password.html')
+    
 
 def resetPasswordView(request):
     return render(request, 'epresence_api/resetpassword.html')
@@ -116,12 +138,7 @@ def Login(request):
         password = request.POST['password']
 
          
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            messages.error(request, 'User does not exist')
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-        
+
     
         user = User.objects.get(email=email)
 

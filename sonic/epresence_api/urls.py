@@ -25,11 +25,7 @@ urlpatterns = [
     path('notes_eleve/', views.Notes_eleve, name='notes_eleve'),
     
     
-    path('reset_password/', views.CustomPasswordResetView.as_view(template_name="epresence_api/resetpassword.html"), name='reset_password'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="epresence_api/resetpassword_sent.html"), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="epresence_api/Password.html"), name='password_reset_confirm'),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="epresence_api/resetpassword_complete.html"), name='password_reset_complete'),
-    
+    path('reset_password/',views.ChangePassword, name='reset_password'),
         
     path('verify/', views.empty_verify_view, name='empty-verify-view'),
     
