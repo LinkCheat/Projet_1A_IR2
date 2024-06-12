@@ -3,9 +3,8 @@ from . import views
 from .views import *
 from django.contrib.auth import views as auth_views
 
-
+app_name = 'epresence_api'
 urlpatterns = [
-    
     
     path('',views.LoginView, name='loginview'),
     path('login',views.Login),
@@ -38,4 +37,5 @@ urlpatterns = [
     path('del/', views.delsession),
 
     path('download_csv/', download_csv, name='download_csv'),
+
 ]
