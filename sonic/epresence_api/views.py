@@ -5,6 +5,7 @@ from django.contrib import messages
 from epresence_api.models import *
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
 import csv
 import io
 from django.http import HttpResponse
@@ -109,7 +110,7 @@ def ChangePassword(request):
         user.save()
 
         messages.success(request, 'Mot de passe changé avec succès!')
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+        return redirect('/')
         
     else:
         return render(request, 'epresence_api/change_password.html')
@@ -418,4 +419,288 @@ def emploi_du_temps_prof(request):
 
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv, 'title':'Emploi du temps'})
+
+
+#statistic .filter(id_professor=id)
+
+def stat_moyenne_par_matiere_prof(request):
+    id=cache.get('id')
+    id=User.objects.get(username=id).pk
+    c = Matiere.objects.all().filter(id_professor=id).values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
+    d = Note.objects.all().values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
+    matiere = [item for item in c]
+    note = [item for item in d]
+    data2=[]
+    print(note)  
+    print(matiere)  
+    for i in note:
+        for y in matiere:
+            if y[0] == i[1]:
+                data2.append([y[1],i[2],i[3]])
+                
+                
+    print(data2)           
+    data3=[]           
+    for i in data2:
+        s=i
+        p=1
+        for y in data2:
+            if y !=i and y[2] == s[2]:
+                s[1]=s[1]+y[1]
+                p=p+1
+        s[1]=s[1]/p
+        data3.append(s)
+    labels = []
+    data = []
+    print(data3)
+    for i in data3:
+        labels = labels+[i[0]]
+        data = data+[i[1]]
+    
+    nom_graphique = 'Moyenne par matiere',
+    context = {
         
+        'labels': labels,
+        'data': data
+    }
+    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
+
+def stat_note_par_matiere_eleve(request):
+    id=cache.get('id')
+    id=User.objects.get(username=id).pk
+    c = Matiere.objects.all().values_list('id_matiere','nom_matiere','semestre','coefficient','ue','total_heures','id_professor')
+    d = Note.objects.all().filter(id_student=id).values_list('id_student','id_matiere','note','date_evaluation','type_evaluation','remarque')
+    matiere = [item for item in c]
+    note = [item for item in d]
+    data2=[]
+
+    for i in note:
+        for y in matiere:
+            if y[0] == i[1]:
+                data2.append([y[1],i[2],i[3]])
+            else:
+                data2.append([y[1],0,i[3]])
+    
+    labels = []
+    data = []
+    for i in data2:
+        labels = labels+[i[0]]
+        data = data+[i[1]]
+
+    nom_graphique = 'Note par matiere',   
+    context = {
+            
+        'labels': labels,
+        'data': data
+    }
+    return render(request, 'epresence_api/graphe.html',{'nom_graphique' : nom_graphique,'data_from_django':context})
+
+# La saisie des notes
+from django.core.paginator import Paginator
+def eleves_liste_notes(request):
+    csv = get_csv_cache('eleves')
+    id = cache.get('id')
+    if id is None:
+        return redirect('/login/')
+    user = User.objects.get(username=id)
+    
+    if csv is None:
+        s_groupe = cache.get('selected_group')
+
+        # Récupérer les élèves dans le groupe sélectionné
+        groupes = GroupTPTD.objects.filter(nom_group=s_groupe)
+        
+        # Préparer les données pour le cache
+        data = []
+        for groupe in groupes:
+            for eleve in groupe.id_students.all():
+                data.append((groupe.id, groupe.nom_group, eleve.username))
+
+        # Mettre les données en cache
+        csv_cache('eleves', ['id', 'nom_group', 'id_students'], data)
+        csv = get_csv_cache('eleves')
+
+    # Pagination
+    paginator = Paginator(csv, 17)  # 10 étudiants par page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Conserver les données saisies
+    if request.method == 'POST':
+        notes_data = request.POST.dict()
+        request.session['notes_data'] = notes_data
+
+    # Récupérer les données saisies de la session
+    notes_data = request.session.get('notes_data', {})
+
+    return render(request, 'epresence_api/saisir_note.html', {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'page_obj': page_obj,
+        'notes_data': notes_data
+    })
+
+# soumettre les notes
+
+def soumettre_notes(request):
+    if request.method == 'POST':
+        id = cache.get('id')
+        if id is None:
+            return redirect('/login/')
+        user = User.objects.get(username=id)
+        
+        s_matiere = cache.get('selected_matiere')
+        s_groupe = cache.get('selected_group')
+        
+        eleves = GroupTPTD.objects.filter(nom_group=s_groupe).values_list('id', flat=True)
+        
+        for eleve_id in eleves:
+            note = request.POST.get(f'note_{eleve_id}')
+            if note:
+                # Sauvegarder la note dans la base de données
+                Note.objects.create(id_student=eleve_id, id_matiere=s_matiere, note=note)
+
+        return redirect('eleves_liste_notes')
+
+    return redirect('/Espace_professeur/')
+
+
+# La saisie des absences
+
+def eleves_liste_abs(request):
+    csv = get_csv_cache('eleves')
+    id = cache.get('id')
+    if id is None:
+        return redirect('/login/')
+    user = User.objects.get(username=id)
+    
+    if csv is None:
+        s_groupe = cache.get('selected_group')
+
+        # Récupérer les élèves dans le groupe sélectionné
+        groupes = GroupTPTD.objects.filter(nom_group=s_groupe)
+        
+        # Préparer les données pour le cache
+        data = []
+        for groupe in groupes:
+            for eleve in groupe.id_students.all():
+                data.append((groupe.id, groupe.nom_group, eleve.username))
+
+        # Mettre les données en cache
+        csv_cache('eleves', ['id', 'nom_group', 'id_students'], data)
+        csv = get_csv_cache('eleves')
+
+    # Pagination
+    paginator = Paginator(csv, 10)  # 10 étudiants par page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Conserver les données saisies
+    if request.method == 'POST':
+        notes_data = request.POST.dict()
+        request.session['notes_data'] = notes_data
+
+    # Récupérer les données saisies de la session
+    notes_data = request.session.get('notes_data', {})
+
+    return render(request, 'epresence_api/saisir_abs.html', {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'page_obj': page_obj,
+        'notes_data': notes_data
+    })
+
+
+
+
+def soumettre_abs(request):
+    if request.method == 'POST':
+        id = cache.get('id')
+        if id is None:
+            return redirect('/login/')
+        user = User.objects.get(username=id)
+        
+        s_matiere = cache.get('selected_matiere')
+        s_groupe = cache.get('selected_group')
+        
+        eleves = GroupTPTD.objects.filter(nom_group=s_groupe).values_list('id', flat=True)
+        
+        for eleve_id in eleves:
+            absence = request.POST.get(f'absence_{eleve_id}')
+            if absence:
+                # Sauvegarder l'absence dans la base de données
+                Absence.objects.create(id_student=eleve_id, id_matiere=s_matiere, absence=True)
+
+        return redirect('eleves_liste_abs')
+
+    return redirect('/Espace_professeur/')
+
+
+
+
+# Afficher les groupes
+def choisir_groupe(request):
+    csv = get_csv_cache('groupes')
+    id = cache.get('id')
+    if id is None:
+        return redirect('/login/')
+    user = User.objects.get(username=id)
+    
+    if csv is None:
+        data = GroupTPTD.objects.all().values_list('nom_group').order_by('nom_group')
+        csv_cache('groupes', ['NomGroupe'], data)
+        csv = get_csv_cache('groupes')
+
+    if request.method == 'POST':
+        selected_group = request.POST.get('group')
+        cache.set('selected_group', selected_group)
+        return redirect('/choisir_matiere/')
+
+    return render(request, 'epresence_api/choisir_groupe.html', {'first_name': user.first_name, 'last_name': user.last_name, 'groupes': csv})
+
+def choisir_groupe_abs(request):
+    csv = get_csv_cache('groupes')
+    id = cache.get('id')
+    if id is None:
+        return redirect('/login/')
+    user = User.objects.get(username=id)
+    
+    if csv is None:
+        data = GroupTPTD.objects.all().values_list('nom_group').order_by('nom_group')
+        csv_cache('groupes', ['NomGroupe'], data)
+        csv = get_csv_cache('groupes')
+
+    if request.method == 'POST':
+        selected_group = request.POST.get('group')
+        cache.set('selected_group', selected_group)
+        return redirect('/saisir_abs/')
+
+    return render(request, 'epresence_api/choisir_groupe_abs.html', {'first_name': user.first_name, 'last_name': user.last_name, 'groupes': csv})
+  
+  
+
+# Afficher les matière
+def choisir_matiere(request):
+    csv = get_csv_cache('matiere')
+    id = cache.get('id')
+    if id is None:
+        return redirect('/login/')
+    user = User.objects.get(username=id)
+    
+    if csv is None:
+        matieres = Matiere.objects.filter(id_professor=user.id)
+        data = Seance.objects.filter(id_matiere__in=matieres).values_list('id_matiere', 'date', 'heure_debut', 'heure_fin', 'salle', 'type_cours')
+        new_data = []
+        for row in data:
+            matiere_obj = Matiere.objects.get(pk=row[0])
+            new_row = (str(matiere_obj), row[1], row[2], row[3], row[4], row[5])
+            new_data.append(new_row)
+        csv_cache('matiere', ['Matiere', 'Date', 'Heure_debut', 'Heure_fin', 'Salle', 'Type_cours'], new_data)
+        csv = get_csv_cache('matiere')
+
+    if request.method == 'POST':
+        selected_matiere = request.POST.get('matiere')
+        cache.set('selected_matiere', selected_matiere)
+        return redirect('/saisir_note/')  # Ajustez cette redirection selon vos besoins
+
+    return render(request, 'epresence_api/choisir_matiere.html', {'first_name': user.first_name, 'last_name': user.last_name, 'matiere': csv})
