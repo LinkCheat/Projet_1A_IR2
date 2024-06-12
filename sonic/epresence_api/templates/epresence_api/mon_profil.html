@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'epresence_api/styles/profile.css' %}">
+    <title>Mon Profil</title>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- User logo -->
+        <div class="user-logo">
+            <img src="{% static 'epresence_api/images/E-Presence.png' %}" alt="User Logo">
+        </div>
+        <!-- App name -->
+        <div class="app-name">
+            <h2>Mon Profil</h2>
+        </div>
+        <!-- Student name -->
+        <div class="student-name">
+            <h3>Num. étudiant: {{ user.username }}</h3>
+            <h3>{{ user.first_name }}</h3>
+            <h3>{{ user.last_name }}</h3>
+        </div>
+        <!-- Logout link -->
+        <div class="logout">
+            <a href="/" class="btn btn-danger">Déconnexion</a>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Mon Profil</h1>
+        <div class="profile-info mb-4">
+            <p><strong>Nom: </strong>{{ user.last_name }}</p>
+            <p><strong>Prénom: </strong>{{ user.first_name }}</p>
+            <p><strong>Numéro étudiant: </strong>{{ user.username }}</p>
+            <p><strong>Filière: </strong>{{ profile.filiere }}</p>
+            <p><strong>Année: </strong>{{ profile.annee }}</p>
+        </div>
+        <h2 class="text-center mb-4">Changer le mot de passe</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
