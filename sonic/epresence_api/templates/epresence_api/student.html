@@ -36,14 +36,14 @@
         </div>
         <!-- Student name -->
         <div class="student-name">
-            <h3>Num. étudiant: {{ user.username }}</h3>
-            <h3> {{ user.first_name }}</h3>
-            <h3> {{ user.last_name }}</h3>
+            <h3>Num. étudiant: {{ username }}</h3>
+            <h3> {{ first_name }}</h3>
+            <h3> {{ last_name }}</h3>
             
         </div>
         <!-- Logout link -->
         <div class="logout">
-            <a href="/" class="btn btn-danger">Déconnexion</a>
+            <a href="{% url 'epresence_api:logout' %}" class="btn btn-danger">Déconnexion</a>
         </div>
     </div>
 

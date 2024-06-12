@@ -35,7 +35,9 @@
     <div class="button-row">
         <a href="{% url 'epresence_api:download_csv' %}" class="btn btn-primary">Télécharger</a>
         <a href="{% url 'epresence_api:home' %}" class="btn btn-primary">Retour</a>
-        <a href="{% url 'epresence_api:logout' %}" class="btn btn-primary">Déconnexion</a>
+    </div>
+    <div class="logout">
+        <a href="{% url 'epresence_api:logout' %}" class="btn btn-danger">Déconnexion</a>
     </div>
 </body>
 </html>

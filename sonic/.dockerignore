@@ -3,4 +3,4 @@
 dockerfile
 
 /staticfiles
-/static/react/
+/static/epresence_api/unused_style_sheets
