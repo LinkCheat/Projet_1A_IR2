@@ -13,6 +13,12 @@ from django.http import HttpResponse
 from django.db.models import Q
 
 
+class CustomPasswordResetView(PasswordResetView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['namespace'] = 'epresence_api'
+        return context
+
     
 #export un csv dans le cache a partir d une requête SQL: export_books_csv('nom_du_fichier', descriptif du fichie(exemple: ['Title', 'Author']), data_obtenue_sql)
 def csv_cache(name, titre_csv, data):
@@ -329,7 +335,7 @@ def emploi_du_temps_eleve(request):
         eleve = Eleve.objects.get(id_student=user.id)
         data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         data = data.filter(Q(id_group=eleve.Classe) | Q(id_group=eleve.TD) | Q(id_group=eleve.TP))
-        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('date').order_by('heure_debut')
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('heure_debut').order_by('date')
         csv_cache('emploi_du_temps_eleve',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_eleve')
 
@@ -349,15 +355,11 @@ def emploi_du_temps_prof(request):
         data = Seance.objects.all().values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours')
         matiere_ids = matiere.values_list('id_matiere', flat=True)
         data = data.filter(id_matiere__in=matiere_ids)
-        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('date').order_by('heure_debut')
+        data = data.values_list('id_matiere','date','heure_debut','heure_fin','salle','type_cours').order_by('heure_debut').order_by('date')
         csv_cache('emploi_du_temps_prof',['matiere','date','heure_debut','heure_fin','salle','type_cours'],data)
         csv = get_csv_cache('emploi_du_temps_prof')
 
     csv_download_applicate('emploi_du_temps_prof')
     return render(request, 'epresence_api/affichage_csv.html',{'first_name':user.first_name,'last_name':user.last_name,'csv_data':csv})
         
-class CustomPasswordResetView(PasswordResetView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['namespace'] = 'epresence_api'
-        return context
+
